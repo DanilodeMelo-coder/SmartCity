@@ -1,4 +1,4 @@
-package com.login;
+package com.segurancapublica.dashboard.util;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class Cript_senha {

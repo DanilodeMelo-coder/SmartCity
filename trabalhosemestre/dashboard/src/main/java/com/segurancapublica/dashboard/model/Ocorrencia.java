@@ -2,6 +2,7 @@ package com.segurancapublica.dashboard.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name="ocorrencias")
@@ -9,7 +10,7 @@ public class Ocorrencia {
 	
 	@Id
 	@Column(name="id_ocorrencia")
-	private long id;
+	private Integer id; // era long, tava errado e mudei pra Integer (mudei nos getters e setters também)
 	
 	private String titulo;
 	private String descricao;
@@ -26,45 +27,38 @@ public class Ocorrencia {
 	    @Column(name = "data_resolucao")
 	    private LocalDateTime dataResolucao;
 
-	    @Column(name = "id_usuario")
-	    private Long idUsuario;
+	    @Column(name = "id_usuario_criador")
+	    private Integer idUsuarioCriador;
 
 	    @Column(name = "id_tipo")
-	    private Long idTipo;
+	    private Integer idTipo;
 
 	    @Column(name = "id_bairro")
-	    private Long idBairro;
+	    private Integer idBairro;
 
 	    @Column(name = "id_status")
-	    private Long idStatus;
+	    private Integer idStatus;
 
 	    @Column(name = "id_gravidade")
-	    private Long idGravidade;
+	    private Integer idGravidade;
 
 	    @Column(name = "id_origem")
-	    private Long idOrigem;
+	    private Integer idOrigem;
 
 	    @Column(name = "tempo_resposta_minutos")
 	    private Integer tempoRespostaMinutos;
 
-	    @Column(name = "nivel_impacto")
-	    private String nivelImpacto;
-
-	    private Boolean resolvido;
+	    @Column(name = "latitude", precision = 9, scale = 6)
+	    private BigDecimal latitude;
 	    
-	    @Column(name = "horario_incidente")
-	    private LocalDateTime horarioIncidente;
-
+	    @Column(name = "longitude", precision = 9, scale = 6)
+	    private BigDecimal longitude;
 	    
-	    public Boolean getResolvido() {
-			return resolvido;
-		}
-
-		public long getId() {
+		public Integer getId() {
 			return id;
 		}
 
-		public void setId(long id) {
+		public void setId(Integer id) {
 			this.id = id;
 		}
 
@@ -100,51 +94,51 @@ public class Ocorrencia {
 			this.dataResolucao = dataResolucao;
 		}
 
-		public Long getIdUsuario() {
-			return idUsuario;
+		public Integer getIdUsuarioCriador() {
+			return idUsuarioCriador;
 		}
 
-		public void setIdUsuario(Long idUsuario) {
-			this.idUsuario = idUsuario;
+		public void setIdUsuarioCriador(Integer idUsuarioCriador) {
+			this.idUsuarioCriador = idUsuarioCriador;
 		}
 
-		public Long getIdTipo() {
+		public Integer getIdTipo() {
 			return idTipo;
 		}
 
-		public void setIdTipo(Long idTipo) {
+		public void setIdTipo(Integer idTipo) {
 			this.idTipo = idTipo;
 		}
 
-		public Long getIdBairro() {
+		public Integer getIdBairro() {
 			return idBairro;
 		}
 
-		public void setIdBairro(Long idBairro) {
+		public void setIdBairro(Integer idBairro) {
 			this.idBairro = idBairro;
 		}
 
-		public Long getIdStatus() {
+		public Integer getIdStatus() {
 			return idStatus;
 		}
 
-		public void setIdStatus(Long idStatus) {
+		public void setIdStatus(Integer idStatus) {
 			this.idStatus = idStatus;
 		}
 
-		public Long getIdGravidade() {
+		public Integer getIdGravidade() {
 			return idGravidade;
 		}
 
-		public void setIdGravidade(Long idGravidade) {
+		public void setIdGravidade(Integer idGravidade) {
 			this.idGravidade = idGravidade;
 		}
 
-		public Long getIdOrigem() {
+		public Integer getIdOrigem() {
 			return idOrigem;
 		}
 
-		public void setIdOrigem(Long idOrigem) {
+		public void setIdOrigem(Integer idOrigem) {
 			this.idOrigem = idOrigem;
 		}
 
@@ -154,26 +148,6 @@ public class Ocorrencia {
 
 		public void setTempoRespostaMinutos(Integer tempoRespostaMinutos) {
 			this.tempoRespostaMinutos = tempoRespostaMinutos;
-		}
-
-		public String getNivelImpacto() {
-			return nivelImpacto;
-		}
-
-		public void setNivelImpacto(String nivelImpacto) {
-			this.nivelImpacto = nivelImpacto;
-		}
-
-		public LocalDateTime getHorarioIncidente() {
-			return horarioIncidente;
-		}
-
-		public void setHorarioIncidente(LocalDateTime horarioIncidente) {
-			this.horarioIncidente = horarioIncidente;
-		}
-
-		public void setResolvido(Boolean resolvido) {
-			this.resolvido = resolvido;
 		}
 
 		public String getTitulo() {
@@ -191,5 +165,21 @@ public class Ocorrencia {
 
 		public void setDescricao(String descricao) {
 		    this.descricao = descricao;
+		}
+		
+		public BigDecimal getLatitude() {
+			return latitude;
+		}
+		
+		public void setLatitude(BigDecimal latitude) {
+			this.latitude = latitude;
+		}
+
+		public BigDecimal getLongitude() {
+			return longitude;
+		}
+		
+		public void setLongitude(BigDecimal longitude) {
+			this.longitude = longitude;
 		}
 }

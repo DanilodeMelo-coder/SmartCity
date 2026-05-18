@@ -512,6 +512,7 @@ main {
 
 #btn_registrar_ocorrencia:active {
       transform: scale(0.97);
+<<<<<<< HEAD
 }
 .container_filtros {
       display: flex;
@@ -549,4 +550,6 @@ main {
 
 .campo_filtro select:focus {
       border-color: #00d4ff;
+=======
+>>>>>>> c1f9e385d6bd3ad206552e0a91dc7cbd0043a9d4
 }

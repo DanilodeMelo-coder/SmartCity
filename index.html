@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -651,4 +652,334 @@
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
 
 </body>
+=======
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+      <link rel="stylesheet" href="src/css/style.css">
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+      <title>TELA ADMIN</title>
+</head>
+<body>
+
+      <nav id="sidebar">
+
+            <div id="sidebar_top">
+
+                  <div id="user">
+                        <img src="img/logo.png" id="user_avatar" alt="Avatar">
+                        <p id="user_infos">
+                              <span class="item-description">Segurança Pública</span>
+                              <span class="item-description">Central de Monitoramento</span>
+                        </p>
+                  </div>
+
+                  <ul id="side_item">
+                        <li class="side-item active">
+                              <a href="#">
+                                    <img src="img/painel-de-controle.png">
+                                    <span class="item-description">Dashboard</span>
+                              </a>
+                        </li>
+                        <li class="side-item">
+                              <a href="#">
+                                    <img src="img/mapa.png">
+                                    <span class="item-description">Mapa</span>
+                              </a>
+                        </li>
+                        <li class="side-item">
+                              <a href="#">
+                                    <img src="img/atencao.png">
+                                    <span class="item-description">Ocorrências</span>
+                              </a>
+                        </li>
+                        <li class="side-item">
+                              <a href="#">
+                                    <img src="img/relogio2.png">
+                                    <span class="item-description">Resposta</span>
+                              </a>
+                        </li>
+                        <li class="side-item">
+                              <a href="#">
+                                    <img src="img/docs.png">
+                                    <span class="item-description">Relatórios</span>
+                              </a>
+                        </li>
+                        <li class="side-item">
+                              <a href="#">
+                                    <img src="img/estatistica.png">
+                                    <span class="item-description">Atividade</span>
+                              </a>
+                        </li>
+                  </ul>
+
+            </div>
+
+            <div id="logout">
+                  <button id="logout_btn">
+                        <img src="img/entrar.png">
+                        <span class="item-description">Login</span>
+                  </button>
+            </div>
+
+            <button id="open_btn">
+                  <img id="open_btn_icon" src="img/seta_direita.png" alt="">
+            </button>
+
+      </nav>
+
+      <div id="conteudo">
+
+            <header id="topo">
+                  <div id="topo_esquerda">
+                        <h1 id="titulo">Dashboard</h1>
+                        <p id="subtitulo">Cidade de São Paulo</p>
+                  </div>
+                  <div id="topo_direita">
+                        <div id="busca">
+                              <img src="img/lupa.png" id="busca_icon">
+                              <input type="text" id="busca_input" placeholder="Buscar ocorrência...">
+                        </div>
+                        
+                        <button class="topo_btn" id="btn_login">
+                              
+                        </button>
+                  </div>
+            </header>
+
+            <main>
+
+                  <div id="periodo_bar">
+                        <span>Período:</span>
+                        <div id="periodo_btns">
+                              <button class="periodo_btn active">Maio 2026</button>
+                              <button class="periodo_btn">Abril 2026</button>
+                              <button class="periodo_btn">Março 2026</button>
+                              <button class="periodo_btn">Últimos 6 meses</button>
+                        </div>
+                       
+                  </div>
+
+                  <div id="cards">
+                        <div class="card">
+                              <div class="card_topo">
+                                    <span class="card_titulo">Total de Ocorrências</span>
+                                    <div class="card_icone laranja">
+                                          <img src="img/atencao.png">
+                                    </div>
+                              </div>
+                              <h2 id="total_ocorrencias">--</h2>
+                              <p class="card_variacao" id="variacao_total">Carregando...</p>
+                        </div>
+                        <div class="card">
+                              <div class="card_topo">
+                                    <span class="card_titulo">Tempo Médio de Resposta</span>
+                                    <div class="card_icone azul">
+                                          <img src="img/relogio2.png">
+                                    </div>
+                              </div>
+                              <h2 id="tempo_resposta">--</h2>
+                              <p class="card_variacao" id="variacao_tempo">Carregando...</p>
+                        </div>
+                        <div class="card">
+                              <div class="card_topo">
+                                    <span class="card_titulo">Regiões Monitoradas</span>
+                                    <div class="card_icone roxo">
+                                          <img src="img/mapa.png">
+                                    </div>
+                              </div>
+                              <h2 id="regioes">--</h2>
+                              <p class="card_variacao" id="variacao_regioes">Carregando...</p>
+                        </div>
+                        <div class="card">
+                              <div class="card_topo">
+                                    <span class="card_titulo">Taxa de Resolução</span>
+                                    <div class="card_icone verde">
+                                          <img src="img/estatistica.png">
+                                    </div>
+                              </div>
+                              <h2 id="taxa_resolucao">--</h2>
+                              <p class="card_variacao" id="variacao_taxa">Carregando...</p>
+                        </div>
+                  </div>
+
+                  <div id="graficos">
+                        <div class="grafico_card">
+                              <div class="grafico_header">
+                                    <div>
+                                          <h3 class="grafico_titulo">Ocorrências por Região</h3>
+                                          <p class="grafico_subtitulo">Total vs. Resolvidos — Maio 2026</p>
+                                    </div>
+                                    <button class="grafico_btn">Mensal</button>
+                              </div>
+                        </div>
+                        <div class="grafico_card">
+                              <div class="grafico_header">
+                                    <div>
+                                          <h3 class="grafico_titulo">Tipos de Incidentes</h3>
+                                          <p class="grafico_subtitulo">Distribuição percentual</p>
+                                    </div>
+                                    <span class="grafico_total">4.287 total</span>
+                              </div>
+                        </div>
+                  </div>
+
+                  <div id="secao_mapa">
+                        <div class="grafico_card">
+                              <div class="grafico_header">
+                                    <div>
+                                          <h3 class="grafico_titulo">Mapa de Incidências</h3>
+                                          <p class="grafico_subtitulo">São Paulo — hotspots em tempo real</p>
+                                    </div>
+                                    <div id="mapa_legenda">
+                                          <span class="legenda_item"><span class="legenda_dot alto"></span> Alto</span>
+                                          <span class="legenda_item"><span class="legenda_dot medio"></span> Médio</span>
+                                          <span class="legenda_item"><span class="legenda_dot baixo"></span> Baixo</span>
+                                    </div>
+                              </div>
+                              <div id="mapa"></div>
+                        </div>
+                        <div class="grafico_card">
+                              <div class="grafico_header">
+                                    <div>
+                                          <h3 class="grafico_titulo">Tempo de Resposta por Serviço</h3>
+                                          <p class="grafico_subtitulo">Evolução semanal em minutos</p>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+
+<div id="ocorrencias_recentes">
+      <div class="grafico_header">
+            <div>
+                  <h3 class="grafico_titulo">Ocorrências Recentes</h3>
+                  <p class="grafico_subtitulo">Atualizações em tempo real</p>
+            </div>
+            <span id="ao_vivo">● Ao vivo</span>
+      </div>
+</div>
+
+            </main>
+
+      </div>
+
+<div id="modal_overlay">
+      <div id="modal_login">
+            <button id="modal_fechar">✕</button>
+            <img src="img/logo.png" id="modal_avatar">
+            <h2 id="modal_titulo">Segurança Pública</h2>
+            <p id="modal_subtitulo">Central de Monitoramento</p>
+
+            <div class="modal_campo">
+                  <label>Email</label>
+                  <input type="text" placeholder="Digite seu Email">
+            </div>
+            <div class="modal_campo">
+                  <label>Senha</label>
+                  <input type="password" placeholder="Digite sua senha">
+            </div>
+            <button id="modal_btn_entrar">Entrar</button>
+      </div>
+</div>
+
+<div id="modal_ocorrencia_overlay">
+      <div id="modal_ocorrencia">
+            <div id="modal_ocorrencia_header">
+                  <div id="modal_ocorrencia_titulo">
+                        <img src="img/atencao.png">
+                        <h2>Nova Ocorrência</h2>
+                  </div>
+                  <button id="modal_ocorrencia_fechar">✕</button>
+            </div>
+
+            <div class="ocorrencia_linha">
+                  <div class="ocorrencia_campo">
+                        <label>Tipo de Incidente <span class="obrigatorio">*</span></label>
+                        <select id="tipo_incidente">
+                              <option value="">Selecione...</option>
+                              <option>Furto</option>
+                              <option>Roubo a Transeunte</option>
+                              <option>Roubo de Veículo</option>
+                              <option>Furto de Veículo</option>
+                              <option>Vandalismo</option>
+                              <option>Tráfico de Drogas</option>
+                              <option>Agressão Física</option>
+                              <option>Perturbação da Ordem</option>
+                              <option>Arrombamento</option>
+                              <option>Outros</option>
+                        </select>
+                  </div>
+                  <div class="ocorrencia_campo">
+                        <label>Região <span class="obrigatorio">*</span></label>
+                        <select id="regiao">
+                              <option value="">Selecione...</option>
+                              <option>Centro</option>
+                              <option>Norte</option>
+                              <option>Sul</option>
+                              <option>Leste</option>
+                              <option>Oeste</option>
+                              <option>Noroeste</option>
+                              <option>Sudeste</option>
+                              <option>Nordeste</option>
+                        </select>
+                  </div>
+            </div>
+
+            <div class="ocorrencia_campo">
+                  <label>Endereço <span class="obrigatorio">*</span></label>
+                  <input type="text" placeholder="Rua, número, bairro...">
+            </div>
+
+            <div class="ocorrencia_linha">
+                  <div class="ocorrencia_campo">
+                        <label>Prioridade</label>
+                        <div id="prioridade_btns">
+                              <button class="prioridade_btn baixa">Baixa</button>
+                              <button class="prioridade_btn media active_media">Média</button>
+                              <button class="prioridade_btn alta">Alta</button>
+                        </div>
+                  </div>
+                  <div class="ocorrencia_campo">
+                        <label>Data e Hora <span class="obrigatorio">*</span></label>
+                        <input type="datetime-local" id="data_hora">
+                  </div>
+            </div>
+
+            <div class="ocorrencia_campo">
+                  <label>Descrição <span class="obrigatorio">*</span></label>
+                  <textarea placeholder="Descreva o incidente com detalhes..."></textarea>
+            </div>
+
+            <p class="ocorrencia_secao">Dados do Solicitante <span>(opcional)</span></p>
+
+            <div class="ocorrencia_linha">
+                  <div class="ocorrencia_campo">
+                        <label>Nome</label>
+                        <input type="text" placeholder="Seu nome">
+                  </div>
+                  <div class="ocorrencia_campo">
+                        <label>Telefone</label>
+                        <input type="text" placeholder="(11) 9 0000-0000">
+                  </div>
+            </div>
+
+            <div id="modal_ocorrencia_footer">
+                  <button id="btn_cancelar_ocorrencia">Cancelar</button>
+                  <button id="btn_registrar_ocorrencia">Registrar Ocorrência</button>
+            </div>
+      </div>
+</div>
+
+
+      <script src="src/javascript/script.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
+
+
+
+
+</body>
+>>>>>>> c1f9e385d6bd3ad206552e0a91dc7cbd0043a9d4
 </html>

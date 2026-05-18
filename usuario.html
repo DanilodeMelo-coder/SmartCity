@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+      <link rel="stylesheet" href="src/css/styleUsuario.css">
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+      <title>Usuário</title>
+
+</head>
+
+<body>
+
+      <div id="conteudo">  <!-- Bloco de cards inicio -->
+
+            <header id="topo">
+                  <div id="topo_esquerda">
+                        <h1 id="titulo">Smart City</h1>
+                        <p id="subtitulo">Cidade de São Paulo</p>
+                  </div>
+
+                  <div id="topo_direita">
+
+                        <button class="topo_btn" id="btn_ocorrencia">
+                              <img src="img/mais.png">
+                              <span>Nova Ocorrência</span>
+                        </button>
+            
+                        <button class="topo_btn" id="btn_login">
+                              <img src="img/entrar.png">
+                        </button>
+
+                  </div>
+
+            </header>
+
+            <main>
+
+                  <div id="cards">
+                        <div class="card">
+                              <div class="card_topo">
+                                    <span class="card_titulo">Região de maior ocorrências</span>
+                                    <div class="card_icone laranja">
+                                          <img src="img/atencao.png">
+                                    </div>
+                              </div>
+                              <h2 id="total_ocorrencias"></h2>
+                              <p class="card_variacao" id="variacao_total"></p>
+                        </div>
+                        <div class="card">
+                              <div class="card_topo">
+                                    <span class="card_titulo">Turnos de maiores ocorrências</span>
+                                    <div class="card_icone azul">
+                                          <img src="img/relogio2.png">
+                                    </div>
+                              </div>
+                              <h2 id="tempo_resposta">--</h2>
+                              <p class="card_variacao" id="variacao_tempo">---</p>
+                        </div>
+                       
+                  </div>
+            <div class="container_filtros">
+      <div class="campo_filtro">
+            <label for="filtro_tipo">Tipo:</label>
+            <select id="filtro_tipo">
+                  <option value="todos">Todos os Incidentes</option>
+                  <option value="furto">Furto</option>
+                  <option value="roubo">Roubo</option>
+                  <option value="roubo">Vandalismo</option>
+                  <option value="roubo">Tráfico</option>
+                  <option value="roubo">Agressão</option>
+                  <option value="roubo">Pertubação</option>
+                  <option value="roubo">Arrombamento</option>
+                  </select>
+      </div>
+
+      <div class="campo_filtro">
+            <label for="filtro_turno">Turno:</label>
+            <select id="filtro_turno">
+                  <option value="todos">Todos os Turnos</option>
+                  <option value="manha">Manhã (06h - 12h)</option>
+                  <option value="tarde">Tarde (12h - 18h)</option>
+                  <option value="noite">Noite (18h - 00h)</option>
+                  <option value="madrugada">Madrugada (00h - 06h)</option>
+            </select>
+      </div>
+</div>
+
+              <div id="mapa_espaco" style="margin-top: 24px;">
+                  
+                  <div id="mapa"></div> <!-- É aqui que o Leaflet vai colocar o mapa -->
+      </div>
+
+              </div>
+            </main>
+      </div> 
+      </div><!-- Bloco de cards fim -->
+
+      
+      <div id="modal_overlay">   <!-- Telas de login inicio--> 
+
+            <div id="modal_login">
+
+            <button id="modal_fechar">✕</button>
+            <img src="img/logo.png" id="modal_avatar">
+            <h2 id="modal_titulo">Segurança Pública</h2>
+            <p id="modal_subtitulo">Central de Monitoramento</p>
+
+            <div class="modal_campo">
+                  <label>Email</label>
+                  <input type="text" placeholder="Digite seu Email">
+            </div>
+            <div class="modal_campo">
+                  <label>Senha</label>
+                  <input type="password" placeholder="Digite sua senha">
+            </div>
+            <button id="modal_btn_entrar">Entrar</button>
+      </div>
+</div><!--Fim tela de login-->
+
+<div id="modal_ocorrencia_overlay">
+      <div id="modal_ocorrencia">
+            <div id="modal_ocorrencia_header">
+                  <div id="modal_ocorrencia_titulo">
+                        <img src="img/atencao.png">
+                        <h2>Nova Ocorrência</h2>
+                  </div>
+                  <button id="modal_ocorrencia_fechar">✕</button>
+            </div>
+
+            <div class="ocorrencia_linha">
+                  <div class="ocorrencia_campo">
+                        <label>Tipo de Incidente <span class="obrigatorio">*</span></label>
+                        <select id="tipo_incidente">
+                              <option value="">Selecione...</option>
+                              <option>Furto</option>
+                              <option>Roubo</option>
+                              <option>Vandalismo</option>
+                              <option>Tráfico</option>
+                              <option>Agressão</option>
+                              <option>Perturbação</option>
+                              <option>Arrombamento</option>
+                              <option>Outros</option>
+                        </select>
+                  </div>
+                  <div class="ocorrencia_campo">
+                        <label>Região <span class="obrigatorio">*</span></label>
+                        <select id="regiao">
+                              <option value="">Selecione...</option>
+                              <option>Centro</option>
+                              <option>Norte</option>
+                              <option>Sul</option>
+                              <option>Leste</option>
+                              <option>Oeste</option>
+                        </select>
+                  </div>
+            </div>
+
+            <div class="ocorrencia_campo">
+                  <label>Endereço <span class="obrigatorio">*</span></label>
+                  <input type="text" placeholder="Rua, número, bairro...">
+            </div>
+
+            <div class="ocorrencia_linha">
+                  <div class="ocorrencia_campo">
+                        <label>Prioridade</label>
+                        <div id="prioridade_btns">
+                              <button class="prioridade_btn baixa">Baixa</button>
+                              <button class="prioridade_btn media active_media">Média</button>
+                              <button class="prioridade_btn alta">Alta</button>
+                        </div>
+                  </div>
+                  <div class="ocorrencia_campo">
+                        <label>Data e Hora <span class="obrigatorio">*</span></label>
+                        <input type="datetime-local" id="data_hora">
+                  </div>
+            </div>
+
+            <div class="ocorrencia_campo">
+                  <label>Descrição <span class="obrigatorio">*</span></label>
+                  <textarea placeholder="Descreva o incidente com detalhes..."></textarea>
+            </div>
+
+            <div id="modal_ocorrencia_footer">
+                  <button id="btn_cancelar_ocorrencia">Cancelar</button>
+                  <button id="btn_registrar_ocorrencia">Registrar Ocorrência</button>
+            </div>
+      </div>
+</div>
+
+
+      <script src="src/javascript/scriptUsuario.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
+
+</body>
+</html>

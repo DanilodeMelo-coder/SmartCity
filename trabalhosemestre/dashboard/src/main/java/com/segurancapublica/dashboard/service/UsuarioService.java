@@ -34,6 +34,10 @@ public class UsuarioService implements UserDetailsService{
 
             throw new IllegalArgumentException("E-mail já cadastrado.");
         }
+        
+        if (usuario.getEmail() != null && usuario.getEmail().isEmpty()) { // sem isso o usuário não gravava no banco caso ele não informasse o email!
+        	usuario.setEmail(null);
+        }
 
         // Senha mínima
         if (usuario.getSenha() == null ||
@@ -44,9 +48,7 @@ public class UsuarioService implements UserDetailsService{
 
         // Tipo cidadão
         usuario.setIdTipoUsuario(2);
-        
         usuario.setSenha(Cript_senha.hash(usuario.getSenha())); // isso criptografa a senha antes de salvar
-
         return usuarioRepository.save(usuario);
     }
 

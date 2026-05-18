@@ -270,6 +270,7 @@
                    id="email"
                    th:field="*{email}"
                    th:classappend="${#fields.hasErrors('email')} ? 'error'"
+				   autocomplete="off"
                    placeholder="exemplo@email.com"
                    maxlength="150">
             <span class="error-msg"
@@ -284,6 +285,7 @@
                    id="senha"
                    th:field="*{senha}"
                    th:classappend="${#fields.hasErrors('senha')} ? 'error'"
+				   autocomplete="off"
                    placeholder="Mínimo 8 caracteres"
                    minlength="8"
                    required>
@@ -293,8 +295,8 @@
         </div>
  
         <!--
-            Campo oculto: define o tipo como "cidadão" (2).
-            O admin terá valor 1, definido na tela do seu colega.
+            Campo oculto: define o tipo como cidadao(2).
+            admin tera valor 1.
         -->
         <input type="hidden" th:field="*{idTipoUsuario}" value="2">
  

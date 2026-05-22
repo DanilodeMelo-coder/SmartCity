@@ -7,8 +7,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -18,6 +23,17 @@ public class SecurityConfig{
 
 	    public SecurityConfig(UsuarioService usuarioService) {
 	        this.usuarioService = usuarioService;
+	    }
+	    
+	    @Bean
+	    public CorsConfigurationSource corsConfigurationSource() {
+	        CorsConfiguration config = new CorsConfiguration();
+	        config.setAllowedOrigins(List.of("http://127.0.0.1:5500"));
+	        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+	        config.setAllowedHeaders(List.of("*"));
+	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	        source.registerCorsConfiguration("/**", config);
+	        return source;  
 	    }
 
 	    @Bean
@@ -35,11 +51,12 @@ public class SecurityConfig{
 	    @Bean
 	    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	        http
+	            .cors(Customizer.withDefaults())
 	            .authorizeHttpRequests(auth -> auth
-	                .requestMatchers("/login", "/cadastro", "/usuario/cadastrar-cidadao", "/css/**", "/js/**", "/images/**").permitAll()
+	                .requestMatchers("/login", "/cadastro", "/api/**", "/usuario/cadastrar-cidadao", "/css/**", "/js/**", "/images/**").permitAll()
 	                .requestMatchers("/admin/**").hasRole("ADMIN")
 	                .requestMatchers("/cidadao/**").hasRole("CIDADAO")
-	                .anyRequest().authenticated() // ← sempre por último!
+	                .anyRequest().authenticated()
 	            )
 	            .formLogin(form -> form
 	                .loginPage("/login")
@@ -58,8 +75,16 @@ public class SecurityConfig{
 	            .logout(logout -> logout
 	                .logoutUrl("/logout")
 	                .logoutSuccessUrl("/login")
+	            )
+	            .exceptionHandling(ex -> ex
+	                .authenticationEntryPoint((request, response, authException) -> {
+	                    response.setStatus(401);
+	                    response.setContentType("application/json");
+	                    response.getWriter().write("{\"sucesso\": false, \"mensagem\": \"Não autenticado\"}");
+	                })
 	            );
 
 	        return http.build();
 	    }
-}
+};
+

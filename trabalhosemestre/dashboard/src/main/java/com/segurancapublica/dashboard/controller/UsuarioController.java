@@ -53,7 +53,7 @@ public class UsuarioController {
 
         model.addAttribute("usuario", new Usuario());
 
-        return  "redirect:/usuario/cadastrar-cidadao";
+        return  "usuario/cadastro-admin";
     }
 
     // Processa admin

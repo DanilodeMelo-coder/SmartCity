@@ -36,10 +36,10 @@ public class SecurityConfig{
 	    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	        http
 	            .authorizeHttpRequests(auth -> auth
-	                .requestMatchers("/login", "/cadastro", "/usuario/cadastrar-cidadao", "/css/**", "/js/**", "/images/**").permitAll()
+	                .requestMatchers("/login", "/cadastro", "/usuario/cadastrar-cidadao", "/usuario/cadastrar-admin", "/css/**", "/js/**", "/images/**").permitAll()
 	                .requestMatchers("/admin/**").hasRole("ADMIN")
 	                .requestMatchers("/cidadao/**").hasRole("CIDADAO")
-	                .anyRequest().authenticated() // ← sempre por último!
+	                .anyRequest().authenticated() //  sempre por ultimo
 	            )
 	            .formLogin(form -> form
 	                .loginPage("/login")

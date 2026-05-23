@@ -20,6 +20,7 @@ body {
       transition: margin-left 0.3s ease;
 }
 
+/* --- TOPO / HEADER --- */
 #topo {
       background-color: #0d1821;
       padding: 16px 24px;
@@ -51,13 +52,6 @@ body {
       display: flex;
       align-items: center;
       gap: 12px;
-}
-#mapa {
-      width: 100%;
-      height: 600px; /* definindo altura pra não ficar estranho */
-      border-radius: 12px;
-      border: 1px solid #1a3350;
-      z-index: 1; /* ficar embaixo dos cards */
 }
 
 .topo_btn {
@@ -106,10 +100,12 @@ main {
       background-color: #070d14;
 }
 
+/* --- CARDS INDICADORES --- */
 #cards {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
+      margin-bottom: 24px;
 }
 
 .card {
@@ -159,8 +155,6 @@ main {
 
 .laranja { background-color: rgba(255, 140, 50, 0.1); }
 .azul    { background-color: rgba(0, 212, 255, 0.1); }
-.roxo    { background-color: rgba(188, 140, 255, 0.1); }
-.verde   { background-color: rgba(62, 207, 142, 0.1); }
 
 .card h2 {
       font-size: 30px;
@@ -176,21 +170,80 @@ main {
       gap: 4px;
 }
 
-#modal_overlay {
+/* --- CONTAINER DE FILTROS --- */
+.container_filtros {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      background-color: #0d1821;
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: 1px solid #1a3350;
+      align-items: center;
+      flex-wrap: wrap;
+}
+
+.campo_filtro {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+}
+
+.campo_filtro label {
+      color: #8892b0;
+      font-size: 13px;
+      font-weight: 500;
+}
+
+.campo_filtro select {
+      background-color: #070d14;
+      border: 1px solid #1a3350;
+      border-radius: 8px;
+      padding: 8px 14px;
+      color: #ccd6f6;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+}
+
+.campo_filtro select:focus {
+      border-color: #00d4ff;
+}
+
+/* --- MAPA COM LEAFLET --- */
+#mapa {
+      width: 100%;
+      height: 480px;
+      border-radius: 16px;
+      border: 1px solid #1a3350;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      z-index: 1; /* Mantém o mapa abaixo dos overlays de modais */
+}
+
+/* --- ESTRUTURA GERAL DOS MODAIS --- */
+#modal_overlay, #modal_ocorrencia_overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.65);
       z-index: 999;
       align-items: center;
       justify-content: center;
       backdrop-filter: blur(4px);
 }
 
-#modal_overlay.aberto {
+#modal_overlay.aberto, #modal_ocorrencia_overlay.aberto {
       display: flex;
 }
 
+@keyframes modal_entrar {
+      from { opacity: 0; transform: scale(0.95); }
+      to   { opacity: 1; transform: scale(1); }
+}
+
+/* --- MODAL LOGIN --- */
 #modal_login {
       background-color: #0d1821;
       border: 1px solid #1a3350;
@@ -206,23 +259,19 @@ main {
       animation: modal_entrar 0.25s ease;
 }
 
-@keyframes modal_entrar {
-      from { opacity: 0; transform: scale(0.95); }
-      to   { opacity: 1; transform: scale(1); }
-}
-
-#modal_fechar {
+#modal_fechar, #modal_ocorrencia_fechar {
       position: absolute;
-      top: 12px;
-      right: 12px;
+      top: 16px;
+      right: 16px;
       background: none;
       border: none;
       color: #8892b0;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
+      transition: color 0.2s ease;
 }
 
-#modal_fechar:hover {
+#modal_fechar:hover, #modal_ocorrencia_fechar:hover {
       color: #ccd6f6;
 }
 
@@ -288,6 +337,20 @@ main {
       margin-top: 4px;
       transition: background-color 0.2s ease, transform 0.1s ease;
 }
+#esqueci {
+      width: 100%;
+      padding: 10px;
+      background-color: #0d1821;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+}
 
 #modal_btn_entrar:hover {
       background-color: #00a8cc;
@@ -297,21 +360,7 @@ main {
       transform: scale(0.97);
 }
 
-#modal_ocorrencia_overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background-color: rgba(0, 0, 0, 0.6);
-      z-index: 999;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(4px);
-}
-
-#modal_ocorrencia_overlay.aberto {
-      display: flex;
-}
-
+/* --- MODAL NOVA OCORRÊNCIA --- */
 #modal_ocorrencia {
       background-color: #0d1821;
       border: 1px solid #1a3350;
@@ -354,18 +403,6 @@ main {
       font-weight: 600;
 }
 
-#modal_ocorrencia_fechar {
-      background: none;
-      border: none;
-      color: #8892b0;
-      font-size: 16px;
-      cursor: pointer;
-}
-
-#modal_ocorrencia_fechar:hover {
-      color: #ccd6f6;
-}
-
 .ocorrencia_linha {
       display: flex;
       gap: 16px;
@@ -403,6 +440,12 @@ main {
       outline: none;
       transition: border 0.2s ease;
       width: 100%;
+}
+
+.ocorrencia_campo select {
+      cursor: pointer;
+      appearance: auto;
+      color-scheme: dark;
 }
 
 .ocorrencia_campo textarea {

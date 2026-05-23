@@ -46,6 +46,8 @@ public class UsuarioService implements UserDetailsService{
             throw new IllegalArgumentException("A senha deve ter no mínimo 8 caracteres.");
         }
 
+        usuario.setCpf(usuario.getCpf().replaceAll("[^0-9]", ""));
+        
         // Tipo cidadão
         usuario.setIdTipoUsuario(2);
         usuario.setSenha(Cript_senha.hash(usuario.getSenha())); // isso criptografa a senha antes de salvar
@@ -78,6 +80,8 @@ public class UsuarioService implements UserDetailsService{
             throw new IllegalArgumentException("A senha deve ter no mínimo 8 caracteres.");
         }
 
+        usuario.setCpf(usuario.getCpf().replaceAll("[^0-9]", ""));
+        
         // Tipo admin
         usuario.setIdTipoUsuario(1);
         

@@ -12,16 +12,6 @@ public class LoginController {
 		return "login";
 	}
 	
-	@GetMapping("/admin/home")
-	public String adminhome() {
-		return "admin/home";
-	}
-	
-	@GetMapping("/user/home")
-	public String userhome() {
-		return "user/home";
-		}
-	
 	@GetMapping("/cadastro")
 	public String cadastro(Model model) {
 	    model.addAttribute("usuario", new Usuario()); // ← isso resolve o erro

@@ -241,7 +241,7 @@
                    th:field="*{telefone}"
                    th:classappend="${#fields.hasErrors('telefone')} ? 'error'"
                    placeholder="(11) 99999-9999"
-                   maxlength="20"
+                   maxlength="12"
                    required>
             <span class="error-msg"
                   th:if="${#fields.hasErrors('telefone')}"

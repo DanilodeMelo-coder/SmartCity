@@ -3,7 +3,9 @@
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <link rel="stylesheet" href="src/css/esqueciSenhaUsuario.css">
+      <link rel="stylesheet" href="src/css/esqueciSenhaUsuario.css">
+      
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
       <title>Troca Senha</title>
 </head>
@@ -17,7 +19,7 @@
 
                   <div class="modal_campo">
                         <label>Email</label>
-                        <input type="text" placeholder="Digite seu Email">
+                        <input type="text" id="email_recuperacao" placeholder="Digite seu Email">
                   </div>
                   
                   <button id="modal_btn_email">Enviar e-mail</button>
@@ -25,10 +27,6 @@
             </div>
       </div>
 
-
-
-
-
-
+      <script src="/src/javascript/esqueciSenhaUsuario.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
       <link rel="stylesheet" href="src/css/style.css">
       <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-      <title>TELA ADMIN</title>
+      <title>Admin</title>
 </head>
 <body>
 
@@ -28,45 +28,12 @@
                                     <img src="img/painel-de-controle.png">
                                     <span class="item-description">Dashboard</span>
                               </a>
-                        </li>
-                        <li class="side-item">
-                              <a href="#">
-                                    <img src="img/mapa.png">
-                                    <span class="item-description">Mapa</span>
-                              </a>
-                        </li>
-                        <li class="side-item">
-                              <a href="#">
-                                    <img src="img/atencao.png">
-                                    <span class="item-description">Ocorrências</span>
-                              </a>
-                        </li>
-                        <li class="side-item">
-                              <a href="#">
-                                    <img src="img/relogio2.png">
-                                    <span class="item-description">Resposta</span>
-                              </a>
-                        </li>
-                        <li class="side-item">
-                              <a href="#">
-                                    <img src="img/docs.png">
-                                    <span class="item-description">Relatórios</span>
-                              </a>
-                        </li>
-                        <li class="side-item">
-                              <a href="#">
-                                    <img src="img/estatistica.png">
-                                    <span class="item-description">Atividade</span>
-                              </a>
-                        </li>
-                  </ul>
-
             </div>
 
-            <div id="logout">
                   <button id="logout_btn">
-                        <img src="img/entrar.png">
-                        <span class="item-description">Login/Cadastro</span>
+                  <div id="logout">
+                  <a href="login/login.html" id="logout_btn">Login/Cadastro</a>
+                  </div>
                   </button>
             </div>
 
@@ -88,11 +55,6 @@
                               <img src="img/lupa.png" id="busca_icon">
                               <input type="text" id="busca_input" placeholder="Buscar ocorrência...">
                         </div>
-                        
-                        <button class="topo_btn" id="btn_login">
-                              
-                        </button>
-                  </div>
             </header>
 
             <main>
@@ -210,117 +172,10 @@
             </main>
 
       </div>
-
-<div id="modal_overlay">
-      <div id="modal_login">
-            <button id="modal_fechar">✕</button>
-            <img src="img/logo.png" id="modal_avatar">
-            <h2 id="modal_titulo">Segurança Pública</h2>
-            <p id="modal_subtitulo">Central de Monitoramento</p>
-
-            <div class="modal_campo">
-                  <label>Email</label>
-                  <input type="text" placeholder="Digite seu Email">
-            </div>
-            <div class="modal_campo">
-                  <label>Senha</label>
-                  <input type="password" placeholder="Digite sua senha">
-            </div>
-            <button id="modal_btn_entrar">Entrar</button>
-             <a href="esqueciSenhaUsuario.html" target="_blank">
-                  <button id="esqueci">Esqueci minha senha</button>
-      </div>
 </div>
-
-<div id="modal_ocorrencia_overlay">
-      <div id="modal_ocorrencia">
-            <div id="modal_ocorrencia_header">
-                  <div id="modal_ocorrencia_titulo">
-                        <img src="img/atencao.png">
-                        <h2>Nova Ocorrência</h2>
-                  </div>
-                  <button id="modal_ocorrencia_fechar">✕</button>
-            </div>
-
-            <div class="ocorrencia_linha">
-                  <div class="ocorrencia_campo">
-                        <label>Tipo de Incidente <span class="obrigatorio">*</span></label>
-                        <select id="tipo_incidente">
-                              <option value="">Selecione...</option>
-                              <option>Furto</option>
-                              <option>Roubo</option>
-                              <option>Vandalismo</option>
-                              <option>Tráfico </option>
-                              <option>Agressão</option>
-                              <option>Perturbação</option>
-                              <option>Arrombamento</option>
-                              <option>Outros</option>
-                        </select>
-                  </div>
-                  <div class="ocorrencia_campo">
-                        <label>Região <span class="obrigatorio">*</span></label>
-                        <select id="regiao">
-                              <option value="">Selecione...</option>
-                              <option>Centro</option>
-                              <option>Norte</option>
-                              <option>Sul</option>
-                              <option>Leste</option>
-                              <option>Oeste</option>
-                        </select>
-                  </div>
-            </div>
-
-            <div class="ocorrencia_campo">
-                  <label>Endereço <span class="obrigatorio">*</span></label>
-                  <input type="text" placeholder="Rua, número, bairro...">
-            </div>
-
-            <div class="ocorrencia_linha">
-                  <div class="ocorrencia_campo">
-                        <label>Prioridade</label>
-                        <div id="prioridade_btns">
-                              <button class="prioridade_btn baixa">Baixa</button>
-                              <button class="prioridade_btn media active_media">Média</button>
-                              <button class="prioridade_btn alta">Alta</button>
-                        </div>
-                  </div>
-                  <div class="ocorrencia_campo">
-                        <label>Data e Hora <span class="obrigatorio">*</span></label>
-                        <input type="datetime-local" id="data_hora">
-                  </div>
-            </div>
-
-            <div class="ocorrencia_campo">
-                  <label>Descrição <span class="obrigatorio">*</span></label>
-                  <textarea placeholder="Descreva o incidente com detalhes..."></textarea>
-            </div>
-
-            <p class="ocorrencia_secao">Dados do Solicitante <span>(opcional)</span></p>
-
-            <div class="ocorrencia_linha">
-                  <div class="ocorrencia_campo">
-                        <label>Nome</label>
-                        <input type="text" placeholder="Seu nome">
-                  </div>
-                  <div class="ocorrencia_campo">
-                        <label>Telefone</label>
-                        <input type="text" placeholder="(11) 9 0000-0000">
-                  </div>
-            </div>
-
-            <div id="modal_ocorrencia_footer">
-                  <button id="btn_cancelar_ocorrencia">Cancelar</button>
-                  <button id="btn_registrar_ocorrencia">Registrar Ocorrência</button>
-            </div>
-      </div>
-</div>
-
 
       <script src="src/javascript/script.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
-
-
-
 
 </body>
 </html>

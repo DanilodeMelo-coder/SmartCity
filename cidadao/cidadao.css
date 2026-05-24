@@ -36,7 +36,9 @@ header {
     font-size: 13px;
 }
 
-.btn-logout:hover { background: #e5737322; }
+.btn-logout:hover { 
+    background: #e5737322; 
+}
 
 .content {
     display: flex;
@@ -92,7 +94,9 @@ input, select, textarea {
     font-size: 14px;
 }
 
-textarea { height: 80px; resize: none; }
+textarea { 
+    height: 80px; resize: none;
+ }
 
 input:focus, select:focus, textarea:focus {
     outline: none;
@@ -112,7 +116,9 @@ button {
     cursor: pointer;
 }
 
-button:hover { background: #00b894; }
+button:hover { 
+    background: #00b894; 
+}
 
 .erro {
     background: #c0392b22;

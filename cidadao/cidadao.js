@@ -56,7 +56,6 @@ async function cadastrarOcorrencia() {
     const titulo    = document.getElementById('titulo').value;
     const descricao = document.getElementById('descricao').value;
     const idTipo    = parseInt(document.getElementById('tipo').value);
-    const idGravidade = parseInt(document.getElementById('gravidade').value);
     const idBairro  = parseInt(document.getElementById('bairro').value);
 
     if (!titulo || !descricao) {
@@ -79,7 +78,7 @@ async function cadastrarOcorrencia() {
                 titulo,
                 descricao,
                 idTipo,
-                idGravidade,
+                idGravidade: 1,
                 idBairro,
                 idUsuarioCriador: 1, // depois substituímos pelo id do usuário logado
                 latitude,
@@ -93,6 +92,9 @@ async function cadastrarOcorrencia() {
             sucesso.textContent = 'Ocorrência registrada com sucesso!';
             sucesso.style.display = 'block';
             limparFormulario();
+            setTimeout(() => {
+        window.location.href = '../usuario.html';
+    }, 2000);
         } else {
             erro.textContent = data.mensagem || 'Erro ao registrar!';
             erro.style.display = 'block';

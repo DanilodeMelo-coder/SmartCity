@@ -11,9 +11,11 @@ if (v.length > 9)
 });
 
 async function fazerLogin() {
+    console.log("fazerLogin chamado");
     const cpf = document.getElementById("cpf").value;
     const senha = document.getElementById("senha").value;
     const erro = document.getElementById("erro");
+    console.log("CPF:", cpf, "Senha:", senha);
 
 erro.style.display = "none";
 
@@ -30,15 +32,18 @@ try {
         body: JSON.stringify({ cpf, senha }),
     });
 
+    console.log("Status:", response.status);
     const data = await response.json();
+    console.log("Resposta:", data);
 
     if (data.sucesso) {
-        localStorage.setItem("tipo", data.tipo);
-      window.location.href = "../usuario.html"; // ← todos vão para usuario.html
+    localStorage.setItem("tipo", data.tipo);
+    if (data.tipo === "ADMIN") {
+        window.location.href = "../index.html";
     } else {
-        erro.textContent = data.mensagem || "CPF ou senha incorretos!";
-        erro.style.display = "block";
+        window.location.href = "../usuario.html";
     }
+}
 } catch (error) {
     erro.textContent = "Erro ao conectar com o servidor!";
     erro.style.display = "block";

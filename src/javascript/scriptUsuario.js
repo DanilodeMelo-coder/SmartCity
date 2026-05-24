@@ -151,44 +151,6 @@ document.getElementById('filtro_tipo').addEventListener('change', buscarOcorrenc
 //opção de "Todos" para Furto", por exemplo, o mapa apaga tudo e refaz o bloco 6 instantaneamente.
 document.getElementById('filtro_turno').addEventListener('change', buscarOcorrenciasDaAPI);
 
-
-// --- funcionalidade DO MODAL DE LOGIN ---
-const modalOverlay = document.getElementById('modal_overlay');
-const btnLogin = document.getElementById('btn_login'); //abre a parte de login
-const modalFechar = document.getElementById('modal_fechar'); //fecha a janela no botão X    
-
-if (btnLogin) {
-      btnLogin.addEventListener('click', () => modalOverlay.classList.add('aberto'));
-}
-if (modalFechar) {
-      modalFechar.addEventListener('click', () => modalOverlay.classList.remove('aberto'));
-}
-modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) modalOverlay.classList.remove('aberto');
-});
-
-
-// --- EVENTOS DO MODAL DE NOVA OCORRÊNCIA ---
-const modalOcorrenciaOverlay = document.getElementById('modal_ocorrencia_overlay');
-const btnOcorrencia = document.getElementById('btn_ocorrencia');
-const btnFecharOcorrencia = document.getElementById('modal_ocorrencia_fechar'); //fecha se apertar no X
-const btnCancelarOcorrencia = document.getElementById('btn_cancelar_ocorrencia');// cancela e fecha o modal
-
-if (btnOcorrencia) {
-      btnOcorrencia.addEventListener('click', () => modalOcorrenciaOverlay.classList.add('aberto'));
-}
-if (btnFecharOcorrencia) {
-      btnFecharOcorrencia.addEventListener('click', () => modalOcorrenciaOverlay.classList.remove('aberto'));
-}
-if (btnCancelarOcorrencia) {
-      btnCancelarOcorrencia.addEventListener('click', () => modalOcorrenciaOverlay.classList.remove('aberto'));
-}
-modalOcorrenciaOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOcorrenciaOverlay) modalOcorrenciaOverlay.classList.remove('aberto');
-});
-
-
-
 // --- INICIALIZAÇÃO DO COMPONENTE ---
 document.addEventListener('DOMContentLoaded', () => {
       // Carrega os dados puxar aqui os dado banco

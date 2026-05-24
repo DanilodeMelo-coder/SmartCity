@@ -13,20 +13,23 @@
 
 <body>
 
-      <div id="conteudo"> <header id="topo">
+      <div id="conteudo"> 
+            <header id="topo">
                   <div id="topo_esquerda">
                         <h1 id="titulo">Smart City</h1>
                         <p id="subtitulo">Cidade de São Paulo</p>
                   </div>
 
                   <div id="topo_direita">
-                        <button class="topo_btn" id="btn_ocorrencia">
+                        <!-- Botão redirecionando para a nova página de ocorrência -->
+                       <button class="topo_btn" id="btn_login" onclick="window.location.href='cidadao/cidadao.html'">
                               <img src="img/mais.png" alt="Nova Ocorrência">
                               <span>Nova Ocorrência</span>
                         </button>
             
-                        <button class="topo_btn" id="btn_login">
-                              <img src="img/entrar.png" alt="Entrar">
+                        <!-- Botão de login corrigido usando onclick -->
+                        <button class="topo_btn" id="btn_login" onclick="window.location.href='login/login.html'">
+                              <span>Login</span>
                         </button>
                   </div>
             </header>
@@ -87,110 +90,6 @@
 
             </main>
       </div> 
-      <div id="modal_overlay">
-            <div id="modal_login">
-                  <button id="modal_fechar">✕</button>
-                  <img src="img/logo.png" id="modal_avatar" alt="Logo">
-                  <h2 id="modal_titulo">Segurança Pública</h2>
-                  <p id="modal_subtitulo">Central de Monitoramento</p>
-
-                  <div class="modal_campo">
-                        <label>Email</label>
-                        <input type="text" placeholder="Digite seu Email">
-                  </div>
-                  <div class="modal_campo">
-                        <label>Senha</label>
-                        <input type="password" placeholder="Digite sua senha">
-                  </div>
-                  <button id="modal_btn_entrar">Entrar</button>
-                  <a href="esqueciSenhaUsuario.html" target="_blank">
-                  <button id="esqueci">Esqueci minha senha</button>
-</a>
-            </div>
-      </div>
-
-      <div id="modal_ocorrencia_overlay">
-            <div id="modal_ocorrencia">
-                  <div id="modal_ocorrencia_header">
-                        <div id="modal_ocorrencia_titulo">
-                              <img src="img/atencao.png" alt="Alerta">
-                              <h2>Nova Ocorrência</h2>
-                        </div>
-                        <button id="modal_ocorrencia_fechar">✕</button>
-                  </div>
-
-                  <div class="ocorrencia_linha">
-                        <div class="ocorrencia_campo">
-                              <label>Tipo de Incidente <span class="obrigatorio">*</span></label>
-                              <select id="tipo_incidente">
-                                    <option value="">Selecione...</option>
-                                    <option>Furto</option>
-                                    <option>Roubo</option>
-                                    <option>Vandalismo</option>
-                                    <option>Tráfico</option>
-                                    <option>Agressão</option>
-                                    <option>Perturbação</option>
-                                    <option>Arrombamento</option>
-                                    <option>Outros</option>
-                              </select>
-                        </div>
-                        <div class="ocorrencia_campo">
-                              <label>Região <span class="obrigatorio">*</span></label>
-                              <select id="regiao">
-                                    <option value="">Selecione...</option>
-                                    <option>Centro</option>
-                                    <option>Norte</option>
-                                    <option>Sul</option>
-                                    <option>Leste</option>
-                                    <option>Oeste</option>
-                              </select>
-                        </div>
-                  </div>
-
-                  <div class="ocorrencia_campo">
-                        <label>Endereço <span class="obrigatorio">*</span></label>
-                        <input type="text" placeholder="Rua, número, bairro...">
-                  </div>
-
-                  <div class="ocorrencia_linha">
-                        <div class="ocorrencia_campo">
-                              <label>Prioridade</label>
-                              <div id="prioridade_btns">
-                                    <button class="prioridade_btn baixa">Baixa</button>
-                                    <button class="prioridade_btn media active_media">Média</button>
-                                    <button class="prioridade_btn alta">Alta</button>
-                              </div>
-                        </div>
-                        <div class="ocorrencia_campo">
-                              <label>Data e Hora <span class="obrigatorio">*</span></label>
-                              <input type="datetime-local" id="data_hora">
-                        </div>
-                  </div>
-
-                  <div class="ocorrencia_campo">
-                        <label>Descrição <span class="obrigatorio">*</span></label>
-                        <textarea placeholder="Descreva o incidente com detalhes..."></textarea>
-                  </div>
-
-                  <p class="ocorrencia_secao">Dados do Solicitante <span>(opcional)</span></p>
-
-                  <div class="ocorrencia_linha">
-                        <div class="ocorrencia_campo">
-                              <label>Nome</label>
-                              <input type="text" placeholder="Seu nome">
-                        </div>
-                        <div class="ocorrencia_campo">
-                              <label>Telefone</label>
-                              <input type="text" placeholder="(11) 9 0000-0000">
-                        </div>
-                  </div>
-
-                  <div id="modal_ocorrencia_footer">
-                        <button id="btn_cancelar_ocorrencia">Cancelar</button>
-                        <button id="btn_registrar_ocorrencia">Registrar Ocorrência</button>
-                  </div>
-            </div>
-      </div>
 
       <script src="src/javascript/scriptUsuario.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   

@@ -52,6 +52,7 @@ async function cadastrar() {
 
     try {
     const response = await fetch(`${API_URL}/api/cadastrar-cidadao`, {
+        method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
         nome,

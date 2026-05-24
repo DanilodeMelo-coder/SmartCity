@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 public class Ocorrencia {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_ocorrencia")
 	private Integer id; // era long, tava errado e mudei pra Integer (mudei nos getters e setters também)
 	

@@ -98,6 +98,24 @@ public class AuthController {
         }
     }
 
+    @GetMapping("/dashboard/bairro-mais-ocorrencias")
+    public ResponseEntity<?> bairroMaisOcorrencias() {
+        try {
+            return ResponseEntity.ok(Map.of("bairro", ocorrenciaService.bairroMaisOcorrencias()));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("mensagem", e.getMessage()));
+        }
+    }
+    
+    @GetMapping("/dashboard/ocorrencias-por-bairro")
+    public ResponseEntity<?> ocorrenciasPorBairro() {
+        try {
+            return ResponseEntity.ok(ocorrenciaService.ocorrenciasPorBairro());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("mensagem", e.getMessage()));
+        }
+    }
+    
     @PostMapping("/cadastrar-cidadao")
     public ResponseEntity<?> cadastrarCidadao(@RequestBody Map<String, Object> body) {
         try {

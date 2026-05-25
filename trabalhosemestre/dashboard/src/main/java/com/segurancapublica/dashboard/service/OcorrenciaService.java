@@ -23,9 +23,16 @@ public class OcorrenciaService {
         return ocorrenciaRepository.save(ocorrencia);
     }
 
+    public String bairroMaisOcorrencias() {
+        return ocorrenciaRepository.findBairroMaisOcorrencias();
+    }
 
 public List<Ocorrencia> listarTodas() {
     return ocorrenciaRepository.findAll();
+}
+
+public List<Object[]> ocorrenciasPorBairro() {
+    return ocorrenciaRepository.findOcorrenciasPorBairro();
 }
 
 }

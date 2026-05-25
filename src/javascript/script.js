@@ -41,6 +41,77 @@ sideItems.forEach(item => {
       });
 });
 
+const API_URL = 'http://localhost:8080/api';
+
+async function carregarDashboard() {
+
+    // Total de ocorrências
+    try {
+        const resposta = await fetch(`${API_URL}/ocorrencias`);
+        const lista = await resposta.json();
+
+        document.getElementById('total_ocorrencias').textContent = lista.length;
+        document.getElementById('variacao_total').textContent = '';
+
+        // Tempo médio de resposta
+        const tempos = lista.filter(o => o.tempoRespostaMinutos != null);
+        if (tempos.length > 0) {
+            const media = tempos.reduce((s, o) => s + o.tempoRespostaMinutos, 0) / tempos.length;
+            document.getElementById('tempo_resposta').textContent = Math.round(media) + ' min';
+        } else {
+            document.getElementById('tempo_resposta').textContent = 'N/A';
+        }
+        document.getElementById('variacao_tempo').textContent = '';
+
+        // Regiões monitoradas (bairros únicos com ocorrências)
+        const bairros = new Set(lista.map(o => o.idBairro).filter(b => b != null));
+        document.getElementById('regioes').textContent = bairros.size;
+        document.getElementById('variacao_regioes').textContent = '';
+
+        // Taxa de resolução
+        const resolvidas = lista.filter(o => o.idStatus === 3).length;
+        const taxa = lista.length > 0 ? ((resolvidas / lista.length) * 100).toFixed(1) : 0;
+        document.getElementById('taxa_resolucao').textContent = taxa + '%';
+        document.getElementById('variacao_taxa').textContent = '';
+
+        // Gráfico de ocorrências por região
+    try {
+    const respostaRegioes = await fetch(`${API_URL}/dashboard/ocorrencias-por-bairro`);
+    const dadosRegioes = await respostaRegioes.json();
+
+    const labels = dadosRegioes.map(item => item[0]);
+    const valores = dadosRegioes.map(item => item[1]);
+
+    new Chart(document.getElementById('grafico_regioes'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Ocorrências',
+                data: valores,
+                backgroundColor: '#00d4ff',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } },
+                x: { ticks: { color: '#8b949e' }, grid: { display: false } }
+            }
+        }
+    });
+      } catch (erro) {
+    console.error("Erro ao carregar gráfico de regiões:", erro);
+      }
+
+    } catch (erro) {
+        console.error("Erro ao carregar dashboard:", erro);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', carregarDashboard);
 
 const periodoBtns = document.querySelectorAll('.periodo_btn');
 

@@ -232,12 +232,6 @@ body {
       font-size: 13px;
 }
 
-#topo_direita {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-}
-
 .topo_btn {
       background: none;
       border: none;
@@ -256,130 +250,11 @@ body {
 .topo_btn:hover {
       background-color: rgba(0, 212, 255, 0.05);
 }
-
-.topo_btn img {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-}
-
-#btn_ocorrencia {
-      background-color: #00d4ff;
-      color: #070d14;
-      font-weight: 600;
-}
-
-#btn_ocorrencia:hover {
-      background-color: #00a8cc; 
-}
-
-#btn_ocorrencia:hover {
-      background-color: #00a8cc; 
-}
-
-#btn_ocorrencia:active {
-      transform: scale(0.94);
-      background-color: #0090b0;
-}
-
-
-#busca {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background-color: #070d14;
-      border: 1px solid #112233;
-      border-radius: 20px;
-      padding: 8px 16px;
-      transition: border 0.2s ease;
-}
-
-#busca:focus-within {
-      border: 1px solid #00d4ff;
-      box-shadow: 0 0 8px rgba(0, 212, 255, 0.2);
-}
-
-#busca_icon {
-      width: 16px;
-      height: 16px;
-      object-fit: contain;
-      opacity: 0.5;
-}
-
-#busca_input {
-      background: none;
-      border: none;
-      outline: none;
-      color: #ccd6f6;
-      font-family: 'Poppins', sans-serif;
-      font-size: 13px;
-      width: 180px;
-}
-
-#busca_input::placeholder {
-      color: #8892b0;
-}
-
 main {
       padding: 24px;
       flex: 1;
       background-color: #070d14;
 }
-
-#periodo_bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 24px;
-}
-
-#periodo_bar span {
-      font-size: 13px;
-      color: #8892b0;
-}
-
-#periodo_btns {
-      display: flex;
-      gap: 8px;
-      flex: 1;
-}
-
-.periodo_btn {
-      background: none;
-      border: 1px solid #112233;
-      border-radius: 20px;
-      padding: 6px 16px;
-      font-size: 13px;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      color: #8892b0;
-      transition: all 0.2s ease;
-}
-
-.periodo_btn.active {
-      background-color: #00d4ff;
-      color: #070d14;
-      border-color: #00d4ff;
-      font-weight: 600;
-}
-
-.periodo_btn:hover:not(.active) {
-      border-color: #00d4ff;
-      color: #00d4ff;
-}
-
-#btn_exportar {
-      background: none;
-      border: 1px solid #112233;
-      border-radius: 8px;
-      padding: 6px 16px;
-      font-size: 13px;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      color: #8892b0;
-      margin-left: auto;
-}
-
 #cards {
       display: flex;
       gap: 16px;
@@ -563,26 +438,3 @@ main {
 .alto  { background-color: #f85149; }
 .medio { background-color: #f5a623; }
 .baixo { background-color: #00d4ff; }
-
-#ocorrencias_recentes {
-      background-color: #112233;
-      border-radius: 16px;
-      padding: 24px;
-      border: 1px solid #1a3350;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
-      margin-top: 24px;
-      min-height: 200px;
-      transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-}
-
-#ocorrencias_recentes:hover {
-      transform: translateY(-3px);
-      border-color: rgba(0, 212, 255, 0.45);
-      background-color: #1e3a52;
-}
-
-#ao_vivo {
-      color: #3ecf8e;
-      font-size: 13px;
-      font-weight: 500;
-}

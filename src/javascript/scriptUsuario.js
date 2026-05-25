@@ -1,5 +1,5 @@
 // Abre o mapa do LEAFLET e já define uma visão inicial (Centro de SP)
-const mapa = L.map('mapa').setView([-23.5505, -46.6333], 13);
+const mapa = L.map('mapa').setView([-23.5505, -46.6333], 14);
 
 // Cria um grupo separado para gerenciar os marcadores de ocorrência dinamicamente, colocar os pininhos das ocorrencias que puxar do banco
 const grupoMarcadores = L.layerGroup().addTo(mapa);
@@ -13,7 +13,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(mapa);
 
 // Configurações de Geolocalização e limites
-const RAIO_MAXIMO_METROS = 3000; // limitei aqui em 3km
+const RAIO_MAXIMO_METROS = 2000;// limitei aqui em 3km
 let localizacaoUsuario = null;    //localização do usuario começa vazia
 let primeiroCarregamento = true; //centralizar a camera na primeira vez que a pessoa entrar
 
@@ -116,7 +116,6 @@ async function buscarOcorrenciasDaAPI() {
         // Limpa os pinos de incidentes antigos antes de filtrar novamente
         grupoMarcadores.clearLayers();
 
-
         listaOcorrenciasReal.forEach(ocorrencia => {
             // Monta as coordenadas com base na latitude e longitude retornadas do banco MySQL
             const coordsOcorrencia = L.latLng([ocorrencia.latitude, ocorrencia.longitude]);
@@ -124,16 +123,14 @@ async function buscarOcorrenciasDaAPI() {
             // Calcula a distância métrica do usuário até o ponto do incidente
             const distancia = localizacaoUsuario.distanceTo(coordsOcorrencia);
             
-            // Validação das regras de negócio combinadas
+            // Validação da regra de negócio: mostrar apenas se estiver no raio de 3km
             const estaNoRaio = distancia <= RAIO_MAXIMO_METROS;
-            const bairroSelecionado = document.getElementById('filtro_bairro').value;
-            const bateOBairro = bairroSelecionado === 'todos' || ocorrencia.idBairro == bairroSelecionado;
 
-            // Insere o marcador se obedecer a todos os filtros e ao raio de 3km
-            if (estaNoRaio && bateOBairro) {
-        const novoMarcador = L.marker(coordsOcorrencia)
-            .bindPopup(`<b>${ocorrencia.titulo}</b><br>${ocorrencia.descricao}<br>Distância: ${(distancia / 1000).toFixed(2)} km`);
-        grupoMarcadores.addLayer(novoMarcador);
+            // Insere o marcador se obedecer ao raio
+            if (estaNoRaio) {
+                const novoMarcador = L.marker(coordsOcorrencia)
+                    .bindPopup(`<b>${ocorrencia.titulo}</b><br>${ocorrencia.descricao}<br>Distância: ${(distancia / 1000).toFixed(2)} km`);
+                grupoMarcadores.addLayer(novoMarcador);
             }
         });
 
@@ -142,22 +139,8 @@ async function buscarOcorrenciasDaAPI() {
     }
 }
 
-
 // --- INICIALIZAÇÃO DO COMPONENTE ---
 document.addEventListener('DOMContentLoaded', () => {
-      // Carrega os dados puxar aqui os dado banco
-<<<<<<< HEAD
-      document.getElementById('filtro_bairro').addEventListener('change', buscarOcorrenciasDaAPI);
-
-      fetch('http://localhost:8080/api/dashboard/bairro-mais-ocorrencias')
-    .then(r => r.json())
-    .then(data => {
-        document.getElementById('total_ocorrencias').textContent = data.bairro;
-    });
-=======
-      document.getElementById('variacao_total').textContent = '';
->>>>>>> 187eb36 (Retirada de gráfico)
-
       // Dispara o fluxo de verificação de geolocalização nativa
       gerenciarPermissaoGPS();
 });

@@ -107,7 +107,7 @@ mapa.on('locationerror', (e) => {
 async function buscarOcorrenciasDaAPI() {
     if (!localizacaoUsuario) return;
 
-    const URL_API = '';
+    const URL_API = 'http://localhost:8080/api/ocorrencias';
 
     try {
         const resposta = await fetch(URL_API);

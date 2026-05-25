@@ -5,13 +5,12 @@ import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
-
 import com.segurancapublica.dashboard.model.Ocorrencia;
 import com.segurancapublica.dashboard.model.Usuario;
 import com.segurancapublica.dashboard.service.OcorrenciaService;
 import com.segurancapublica.dashboard.service.UsuarioService;
-
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -21,14 +20,14 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final OcorrenciaService ocorrenciaService;
-    private final UsuarioService usuarioService; // ← campo declarado
+    private final UsuarioService usuarioService;
 
     public AuthController(AuthenticationManager authenticationManager,
                           OcorrenciaService ocorrenciaService,
                           UsuarioService usuarioService) {
         this.authenticationManager = authenticationManager;
         this.ocorrenciaService = ocorrenciaService;
-        this.usuarioService = usuarioService; // ← atribuído
+        this.usuarioService = usuarioService;
     }
 
     @PostMapping("/login")
@@ -82,6 +81,19 @@ public class AuthController {
             return ResponseEntity.status(500).body(Map.of(
                 "sucesso", false,
                 "mensagem", "Erro ao cadastrar ocorrência: " + e.getMessage()
+            ));
+        }
+    }
+
+    @GetMapping("/ocorrencias")
+    public ResponseEntity<?> listarOcorrencias() {
+        try {
+            List<Ocorrencia> lista = ocorrenciaService.listarTodas();
+            return ResponseEntity.ok(lista);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of(
+                "sucesso", false,
+                "mensagem", e.getMessage()
             ));
         }
     }

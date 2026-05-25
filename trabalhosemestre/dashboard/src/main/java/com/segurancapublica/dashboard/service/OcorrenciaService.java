@@ -4,6 +4,7 @@ import com.segurancapublica.dashboard.model.Ocorrencia;
 import com.segurancapublica.dashboard.repository.OcorrenciaRepository;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class OcorrenciaService {
@@ -21,4 +22,10 @@ public class OcorrenciaService {
         ocorrencia.setIdOrigem(1);   // origem padrão: cidadão
         return ocorrenciaRepository.save(ocorrencia);
     }
+
+
+public List<Ocorrencia> listarTodas() {
+    return ocorrenciaRepository.findAll();
+}
+
 }

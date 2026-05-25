@@ -106,6 +106,44 @@ async function carregarDashboard() {
     console.error("Erro ao carregar gráfico de regiões:", erro);
       }
 
+      // Gráfico de tipos de incidentes
+try {
+    const respostaTipos = await fetch(`${API_URL}/dashboard/ocorrencias-por-tipo`);
+    const dadosTipos = await respostaTipos.json();
+
+    const labelsTipos = dadosTipos.map(item => item[0]);
+    const valoresTipos = dadosTipos.map(item => item[1]);
+
+    document.getElementById('total_tipos').textContent = valoresTipos.reduce((a, b) => a + b, 0) + ' total';
+
+    new Chart(document.getElementById('grafico_tipos'), {
+        type: 'doughnut',
+        data: {
+            labels: labelsTipos,
+            datasets: [{
+                data: valoresTipos,
+                backgroundColor: [
+                    '#00d4ff', '#ff6384', '#ffce56',
+                    '#4bc0c0', '#9966ff', '#ff9f40',
+                    '#36a2eb', '#e7e9ed', '#8b949e'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: { color: '#8b949e', padding: 15 }
+                }
+            }
+        }
+    });
+} catch (erro) {
+    console.error("Erro ao carregar gráfico de tipos:", erro);
+}
+
     } catch (erro) {
         console.error("Erro ao carregar dashboard:", erro);
     }

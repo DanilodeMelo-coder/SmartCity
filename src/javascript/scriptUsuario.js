@@ -141,8 +141,8 @@ async function buscarOcorrenciasDaAPI() {
 
 // --- INICIALIZAÇÃO DO COMPONENTE ---
 document.addEventListener('DOMContentLoaded', () => {
-<<<<<<< HEAD
-=======
+
+
       // Carrega os dados puxar aqui os dado banco
 
       document.getElementById('filtro_bairro').addEventListener('change', buscarOcorrenciasDaAPI);
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('variacao_total').textContent = '';
 
 
->>>>>>> ada87a00d8bdad633e6bfd9ef0e9a613399d7946
+
       // Dispara o fluxo de verificação de geolocalização nativa
       gerenciarPermissaoGPS();
 });

@@ -128,10 +128,32 @@ async function buscarOcorrenciasDaAPI() {
 
             // Insere o marcador se obedecer ao raio
             if (estaNoRaio) {
-                const novoMarcador = L.marker(coordsOcorrencia)
-                    .bindPopup(`<b>${ocorrencia.titulo}</b><br>${ocorrencia.descricao}<br>Distância: ${(distancia / 1000).toFixed(2)} km`);
-                grupoMarcadores.addLayer(novoMarcador);
-            }
+    const tiposIcone = {
+        1: { emoji: '🔧', cor: '#e67e22' },
+        2: { emoji: '🚨', cor: '#e74c3c' },
+        3: { emoji: '🏥', cor: '#3498db' },
+        4: { emoji: '🌿', cor: '#27ae60' }
+    };
+    const tipo = tiposIcone[ocorrencia.idTipo] || { emoji: '📍', cor: '#7f8c8d' };
+
+    const icone = L.divIcon({
+        className: '',
+        html: `<div style="background:${tipo.cor};color:white;border-radius:50%;
+               width:36px;height:36px;display:flex;align-items:center;
+               justify-content:center;font-size:18px;border:2px solid white;
+               box-shadow:0 2px 6px rgba(0,0,0,0.4)">${tipo.emoji}</div>`,
+        iconSize: [36, 36],
+        iconAnchor: [18, 18]
+    });
+
+    const novoMarcador = L.marker(coordsOcorrencia, { icon: icone })
+        .bindPopup(`
+            <strong>${ocorrencia.titulo}</strong><br>
+            ${ocorrencia.descricao}<br>
+            <small>📅 Distância: ${(distancia / 1000).toFixed(2)} km</small>
+        `);
+    grupoMarcadores.addLayer(novoMarcador);
+}
         });
 
     } catch (erro) {
@@ -145,18 +167,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Carrega os dados puxar aqui os dado banco
 
-      document.getElementById('filtro_bairro').addEventListener('change', buscarOcorrenciasDaAPI);
+      const filtroBairro = document.getElementById('filtro_bairro');
+    if (filtroBairro) filtroBairro.addEventListener('change', buscarOcorrenciasDaAPI);
 
-      fetch('http://localhost:8080/api/dashboard/bairro-mais-ocorrencias')
-    .then(r => r.json())
-    .then(data => {
-        document.getElementById('total_ocorrencias').textContent = data.bairro;
-    });
+    fetch('http://localhost:8080/api/dashboard/bairro-mais-ocorrencias')
+        .then(r => r.json())
+        .then(data => {
+            const totalEl = document.getElementById('total_ocorrencias');
+            if (totalEl) totalEl.textContent = data.bairro; // ← protegido
+        });
 
-      document.getElementById('variacao_total').textContent = '';
+    const variacaoEl = document.getElementById('variacao_total');
+    if (variacaoEl) variacaoEl.textContent = '';
 
-
-
-      // Dispara o fluxo de verificação de geolocalização nativa
-      gerenciarPermissaoGPS();
+    gerenciarPermissaoGPS();
 });

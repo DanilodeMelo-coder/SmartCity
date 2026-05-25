@@ -116,6 +116,15 @@ public class AuthController {
         }
     }
     
+    @GetMapping("/dashboard/ocorrencias-por-tipo")
+    public ResponseEntity<?> ocorrenciasPorTipo() {
+        try {
+            return ResponseEntity.ok(ocorrenciaService.ocorrenciasPorTipo());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("mensagem", e.getMessage()));
+        }
+    }
+    
     @PostMapping("/cadastrar-cidadao")
     public ResponseEntity<?> cadastrarCidadao(@RequestBody Map<String, Object> body) {
         try {

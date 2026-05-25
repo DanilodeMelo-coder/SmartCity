@@ -126,15 +126,14 @@ async function buscarOcorrenciasDaAPI() {
             
             // Validação das regras de negócio combinadas
             const estaNoRaio = distancia <= RAIO_MAXIMO_METROS;
-            const bateOTipo = tipoSelecionado === 'todos' || ocorrencia.tipo.toLowerCase() === tipoSelecionado.toLowerCase();
-            const bateOTurno = turnoSelecionado === 'todos' || ocorrencia.turno === turnoSelecionado;
+            const bairroSelecionado = document.getElementById('filtro_bairro').value;
+            const bateOBairro = bairroSelecionado === 'todos' || ocorrencia.idBairro == bairroSelecionado;
 
             // Insere o marcador se obedecer a todos os filtros e ao raio de 3km
-            if (estaNoRaio && bateOTipo && bateOTurno) {
-                const novoMarcador = L.marker(coordsOcorrencia)
-                    .bindPopup(`<b>${ocorrencia.tipo}</b><br>Turno: ${ocorrencia.turno}<br>Distância: ${(distancia / 1000).toFixed(2)} km`);
-                
-                grupoMarcadores.addLayer(novoMarcador);
+            if (estaNoRaio && bateOBairro) {
+        const novoMarcador = L.marker(coordsOcorrencia)
+            .bindPopup(`<b>${ocorrencia.titulo}</b><br>${ocorrencia.descricao}<br>Distância: ${(distancia / 1000).toFixed(2)} km`);
+        grupoMarcadores.addLayer(novoMarcador);
             }
         });
 
@@ -147,8 +146,13 @@ async function buscarOcorrenciasDaAPI() {
 // --- INICIALIZAÇÃO DO COMPONENTE ---
 document.addEventListener('DOMContentLoaded', () => {
       // Carrega os dados puxar aqui os dado banco
-      document.getElementById('total_ocorrencias').textContent = '--';
-      document.getElementById('variacao_total').textContent = '--';
+      document.getElementById('filtro_bairro').addEventListener('change', buscarOcorrenciasDaAPI);
+
+      fetch('http://localhost:8080/api/dashboard/bairro-mais-ocorrencias')
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById('total_ocorrencias').textContent = data.bairro;
+    });
 
       // Dispara o fluxo de verificação de geolocalização nativa
       gerenciarPermissaoGPS();

@@ -21,13 +21,13 @@
                   </div>
 
                   <div id="topo_direita">
-                        <!-- Botão redirecionando para a nova página de ocorrência -->
+                        
                        <button class="topo_btn" id="btn_login" onclick="window.location.href='cidadao/cidadao.html'">
                               <img src="img/mais.png" alt="Nova Ocorrência">
                               <span>Nova Ocorrência</span>
                         </button>
             
-                        <!-- Botão de login corrigido usando onclick -->
+                        
                         <button class="topo_btn" id="btn_login" onclick="window.location.href='login/login.html'">
                               <span>Login</span>
                         </button>
@@ -44,55 +44,14 @@
                                     </div>
                               </div>
                               <h2 id="total_ocorrencias"></h2>
-                              <p class="card_variacao" id="variacao_total">...</p>
-                        </div>
-                        <div class="card">
-                              <div class="card_topo">
-                                    <span class="card_titulo">Turno de maiores ocorrências</span>
-                                    <div class="card_icone azul">
-                                          <img src="img/relogio2.png" alt="Relógio">
-                                    </div>
-                              </div>
-                              <h2 id="tempo_resposta">--</h2>
-                              <p class="card_variacao" id="variacao_tempo">Carregando...</p>
+                              <p class="card_variacao" id="variacao_total"></p>
                         </div>
                   </div>
 
-                  <div class="container_filtros">
-                        <div class="campo_filtro">
-                              <label for="filtro_tipo">Tipo de Incidente:</label>
-                              <select id="filtro_tipo">
-                                    <option value="todos">Todos os Incidentes</option>
-                                    <option value="furto">Furto</option>
-                                    <option value="roubo">Roubo</option>
-                                    <option value="vandalismo">Vandalismo</option>
-                                    <option value="agressao">Agressão</option>
-                                    <option value="trafico">Tráfico</option>
-                                    <option value="agressao">Perturbação</option>
-                                    <option value="agressao">Arrombamento</option>
-                                    <option value="outros">Outros</option>
-                              </select>
-                        </div>
-
-                        <div class="campo_filtro">
-                              <label for="filtro_turno">Turno:</label>
-                              <select id="filtro_turno">
-                                    <option value="todos">Todos os Turnos</option>
-                                    <option value="manha">Manhã</option>
-                                    <option value="tarde">Tarde</option>
-                                    <option value="noite">Noite</option>
-                                    <option value="madrugada">Madrugada</option>
-                              </select>
-                        </div>
-                  </div>
-
-                  <div id="mapa"></div>
-
+                  <div id="mapa"> </div>
             </main>
       </div> 
-
       <script src="src/javascript/scriptUsuario.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
-
 </body>
 </html>

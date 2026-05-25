@@ -1,5 +1,5 @@
-// Abre o mapa do LEAFLET  pega a div 'map' que criei"
-const mapa = L.map('mapa');
+// Abre o mapa do LEAFLET e já define uma visão inicial (Centro de SP)
+const mapa = L.map('mapa').setView([-23.5505, -46.6333], 13);
 
 // Cria um grupo separado para gerenciar os marcadores de ocorrência dinamicamente, colocar os pininhos das ocorrencias que puxar do banco
 const grupoMarcadores = L.layerGroup().addTo(mapa);
@@ -116,9 +116,6 @@ async function buscarOcorrenciasDaAPI() {
         // Limpa os pinos de incidentes antigos antes de filtrar novamente
         grupoMarcadores.clearLayers();
 
-        // Pega as opções selecionadas nos menus HTML
-        const tipoSelecionado = document.getElementById('filtro_tipo').value;
-        const turnoSelecionado = document.getElementById('filtro_turno').value;
 
         listaOcorrenciasReal.forEach(ocorrencia => {
             // Monta as coordenadas com base na latitude e longitude retornadas do banco MySQL
@@ -146,20 +143,12 @@ async function buscarOcorrenciasDaAPI() {
     }
 }
 
-// aqui para ler os filtros
-document.getElementById('filtro_tipo').addEventListener('change', buscarOcorrenciasDaAPI);// Sempre que o usuário mudar a 
-//opção de "Todos" para Furto", por exemplo, o mapa apaga tudo e refaz o bloco 6 instantaneamente.
-document.getElementById('filtro_turno').addEventListener('change', buscarOcorrenciasDaAPI);
 
 // --- INICIALIZAÇÃO DO COMPONENTE ---
 document.addEventListener('DOMContentLoaded', () => {
       // Carrega os dados puxar aqui os dado banco
       document.getElementById('total_ocorrencias').textContent = '--';
       document.getElementById('variacao_total').textContent = '--';
-
-      document.getElementById('tempo_resposta').textContent = ' --';
-      document.getElementById('variacao_tempo').textContent = '--';
-      document.getElementById('variacao_tempo').style.color = '--';
 
       // Dispara o fluxo de verificação de geolocalização nativa
       gerenciarPermissaoGPS();

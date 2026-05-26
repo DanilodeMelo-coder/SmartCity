@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+      <link rel="stylesheet" href="src/css/styleUsuario.css">
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+      <title>Usuario</title>
+
+</head>
+
+<body>
+
+      <div id="conteudo"> 
+            <header id="topo">
+                  <div id="topo_esquerda">
+                        <h1 id="titulo">Smart City</h1>
+                        <p id="subtitulo">Cidade de São Paulo</p>
+                  </div>
+
+                  <div id="topo_direita">
+                        
+                       <button class="topo_btn" id="btn_login" onclick="window.location.href='cidadao/cidadao.html'">
+                              <img src="img/mais.png" alt="Nova Ocorrência">
+                              <span>Nova Ocorrência</span>
+                        </button>
+            
+                        
+                        <button class="topo_btn" id="btn_login" onclick="window.location.href='login/login.html'">
+                              <span>Login</span>
+                        </button>
+                  </div>
+            </header>
+
+            <main>
+                  <div id="mapa"></div>
+            </main>
+      </div> 
+      <script src="src/javascript/scriptUsuario.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
+</body>
+</html>

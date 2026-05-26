@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cadastroadm.css"/>
+
+    <title>Cadastro de Administrador – Smart City</title>
+    
+</head>
+<body>
+ 
+<div class="card">
+ 
+    <div class="card-header">
+        <div class="icon">👤</div>
+        <div>
+            <h1>Cadastro de Administrador</h1>
+            <p>Segurança Pública – Central de Monitoramento</p>
+        </div>
+    </div>
+ 
+    <div class="alert alert-success"
+         th:if="${param.sucesso}"
+         th:text="'Cadastro realizado com sucesso! Bem-vindo(a), ' + ${param.nome} + '.'"></div>
+ 
+    <div class="alert alert-error"
+         th:if="${erro}"
+         th:text="${erro}"></div>
+ 
+    <form th:action="@{/usuario/cadastrar-admin}"
+          th:object="${usuario}"
+          method="post"
+          novalidate>
+ 
+        <div class="form-group">
+            <label for="nome">Nome completo <span class="required">*</span></label>
+            <input type="text"
+                   id="nome"
+                   th:field="*{nome}"
+                   th:classappend="${#fields.hasErrors('nome')} ? 'error'"
+                   placeholder="Ex.: Rafael Moura Ferreira"
+                   maxlength="100"
+                   required>
+            <span class="error-msg"
+                  th:if="${#fields.hasErrors('nome')}"
+                  th:errors="*{nome}"></span>
+        </div>
+ 
+        <div class="form-group">
+            <label for="cpf">CPF <span class="required">*</span></label>
+            <input type="text"
+                   id="cpf"
+                   th:field="*{cpf}"
+                   th:classappend="${#fields.hasErrors('cpf')} ? 'error'"
+                   placeholder="00000000000"
+                   maxlength="11"
+                   required>
+            <span class="error-msg"
+                  th:if="${#fields.hasErrors('cpf')}"
+                  th:errors="*{cpf}"></span>
+        </div>
+ 
+        <div class="form-group">
+            <label for="telefone">Telefone <span class="required">*</span></label>
+            <input type="text"
+                   id="telefone"
+                   th:field="*{telefone}"
+                   th:classappend="${#fields.hasErrors('telefone')} ? 'error'"
+                   placeholder="(11) 99999-9999"
+                   maxlength="12"
+                   required>
+            <span class="error-msg"
+                  th:if="${#fields.hasErrors('telefone')}"
+                  th:errors="*{telefone}"></span>
+        </div>
+ 
+        <div class="form-group">
+            <label for="dataNascimento">Data de nascimento <span class="required">*</span></label>
+            <input type="date"
+                   id="dataNascimento"
+                   th:field="*{dataNascimento}"
+                   th:classappend="${#fields.hasErrors('dataNascimento')} ? 'error'"
+                   required>
+            <span class="error-msg"
+                  th:if="${#fields.hasErrors('dataNascimento')}"
+                  th:errors="*{dataNascimento}"></span>
+        </div>
+ 
+        <hr class="divider">
+ 
+        <div class="form-group">
+            <label for="email">E-mail <span class="required">*</span></label>
+            <input type="email"
+                   id="email"
+                   th:field="*{email}"
+                   th:classappend="${#fields.hasErrors('email')} ? 'error'"
+                   placeholder="exemplo@email.com"
+                   maxlength="150"
+                   required>
+            <span class="error-msg"
+                  th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}"></span>
+        </div>
+ 
+        <div class="form-group">
+            <label for="senha">Senha <span class="required">*</span></label>
+            <input type="password"
+                   id="senha"
+                   th:field="*{senha}"
+                   th:classappend="${#fields.hasErrors('senha')} ? 'error'"
+                   placeholder="Mínimo 8 caracteres"
+                   minlength="8"
+                   required>
+            <span class="error-msg"
+                  th:if="${#fields.hasErrors('senha')}"
+                  th:errors="*{senha}"></span>
+        </div>
+ 
+        <input type="hidden" th:field="*{idTipoUsuario}" value="1">
+ 
+        <button type="submit" class="btn-submit">Cadastrar</button>
+    </form>
+ 
+    <p class="footer-link">
+        Já tem cadastro? <a th:href="@{/login}">Entrar</a>
+    </p>
+</div>
+ 
+</body>
+</html>

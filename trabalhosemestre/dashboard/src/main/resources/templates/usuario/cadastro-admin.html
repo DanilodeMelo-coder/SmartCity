@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Administrador – Smart City</title>
+ 
+    
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+ 
+        .card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+ 
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.75rem;
+        }
+ 
+        .card-header .icon {
+            width: 40px;
+            height: 40px;
+            background: #0d2137;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+ 
+        .card-header h1 {
+            font-size: 1.25rem;
+            color: #e6edf3;
+            font-weight: 600;
+        }
+ 
+        .card-header p {
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+ 
+        .form-group {
+            margin-bottom: 1.1rem;
+        }
+ 
+        label {
+            display: block;
+            font-size: 0.85rem;
+            color: #8b949e;
+            margin-bottom: 0.35rem;
+        }
+ 
+        label .required {
+            color: #f85149;
+            margin-left: 2px;
+        }
+ 
+        label .optional {
+            color: #6e7681;
+            font-size: 0.75rem;
+            margin-left: 4px;
+        }
+ 
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"] {
+            width: 100%;
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #e6edf3;
+            font-size: 0.95rem;
+            padding: 0.55rem 0.75rem;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+ 
+        input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+ 
+        input.error {
+            border-color: #f85149;
+        }
+ 
+        .error-msg {
+            font-size: 0.78rem;
+            color: #f85149;
+            margin-top: 0.3rem;
+        }
+ 
+        /* Alerta de sucesso / erro vindo do servidor */
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            margin-bottom: 1.25rem;
+        }
+ 
+        .alert-success {
+            background-color: #0f2a1a;
+            border: 1px solid #238636;
+            color: #3fb950;
+        }
+ 
+        .alert-error {
+            background-color: #2a0f0f;
+            border: 1px solid #6e1c1c;
+            color: #f85149;
+        }
+ 
+        .btn-submit {
+            width: 100%;
+            padding: 0.65rem;
+            background-color: #00d4ff;
+            color: #0d1117;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+ 
+        .btn-submit:hover { background-color: #00b8d9; }
+        .btn-submit:active { transform: scale(0.98); }
+ 
+        .footer-link {
+            text-align: center;
+            margin-top: 1.25rem;
+            font-size: 0.85rem;
+            color: #8b949e;
+        }
+ 
+        .footer-link a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+ 
+        .footer-link a:hover { text-decoration: underline; }
+ 
+        .divider {
+            border: none;
+            border-top: 1px solid #21262d;
+            margin: 1.25rem 0;
+        }
+    </style>
+</head>
+<body>
+ 
+<div class="card">
+ 
+    <!-- Cabeçalho -->
+    <div class="card-header">
+        <div class="icon">👤</div>
+        <div>
+            <h1>Cadastro de Administrador</h1>
+            <p>Segurança Pública – Central de Monitoramento</p>
+        </div>
+    </div>
+ 
+    <!-- Mensagem de sucesso vinda do redirect -->
+    <div class="alert alert-success"
+         th:if="${param.sucesso}"
+         th:text="'Cadastro realizado com sucesso! Bem-vindo(a), ' + ${param.nome} + '.'">
+    </div>
+ 
+    <!-- Mensagem de erro vinda do controller -->
+    <div class="alert alert-error"
+         th:if="${erro}"
+         th:text="${erro}">
+    </div>
+ 
+    <!--
+        AÇÃO: POST /usuario/cadastrar-admin
+        O controller receberá um objeto Usuario já populado pelo Thymeleaf.
+        Seu colega implementará esse endpoint no UsuarioController.
+    -->
+    <form th:action="@{/usuario/cadastrar-admin}"
+          th:object="${usuario}"
+          method="post"
+          novalidate>
+ 
+        <!-- Nome completo -->
+        <div class="form-group">
+            <label for="nome">Nome completo <span class="required">*</span></label>
+            <input type="text"
+                   id="nome"
+                   th:field="*{nome}"
+                   th:classappend="${#fields.hasErrors('nome')} ? 'error'"
+                   placeholder="Ex.: Rafael Moura Ferreira"
+                   maxlength="100"
+                   required>
+            <span class="error-msg"
+                  th:if="${#fields.hasErrors('nome')}"
+                  th:errors="*{nome}"></span>
+        </div>
+ 
+        <!-- CPF -->
+        <div class="form-group">
+            <label for="cpf">CPF <span class="required">*</span></label>
+            <input type="text"
+                   id="cpf"
+                   th:field="*{cpf}"
+                   th:classappend="${#fields.hasErrors('cpf')} ? 'error'"
+                   placeholder="00000000000"
+                   maxlength="11"
+                   required>
+            <span class="error-msg"
+                  th:if="${#fields.hasErrors('cpf')}"
+                  th:errors="*{cpf}"></span>
+        </div>
+ 
+        <!-- Telefone -->
+        <div class="form-group">
+            <label for="telefone">Telefone <span class="required">*</span></label>
+            <input type="text"
+                   id="telefone"
+                   th:field="*{telefone}"
+                   th:classappend="${#fields.hasErrors('telefone')} ? 'error'"
+                   placeholder="(11) 99999-9999"
+                   maxlength="12"
+                   required>
+            <span class="error-msg"
+                  th:if="${#fields.hasErrors('telefone')}"
+                  th:errors="*{telefone}"></span>
+        </div>
+ 
+        <!-- Data de nascimento -->
+        <div class="form-group">
+            <label for="dataNascimento">Data de nascimento <span class="required">*</span></label>
+            <input type="date"
+                   id="dataNascimento"
+                   th:field="*{dataNascimento}"
+                   th:classappend="${#fields.hasErrors('dataNascimento')} ? 'error'"
+                   required>
+            <span class="error-msg"
+                  th:if="${#fields.hasErrors('dataNascimento')}"
+                  th:errors="*{dataNascimento}"></span>
+        </div>
+ 
+        <hr class="divider">
+ 
+        <!-- E-mail (OBRIGATÓRIO para admin) -->
+        <div class="form-group">
+            <label for="email">E-mail <span class="required">*</span></label>
+            <input type="email"
+                   id="email"
+                   th:field="*{email}"
+                   th:classappend="${#fields.hasErrors('email')} ? 'error'"
+                   placeholder="exemplo@email.com"
+                   maxlength="150"
+				   required>
+            <span class="error-msg"
+                  th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}"></span>
+        </div>
+ 
+        <!-- Senha -->
+        <div class="form-group">
+            <label for="senha">Senha <span class="required">*</span></label>
+            <input type="password"
+                   id="senha"
+                   th:field="*{senha}"
+                   th:classappend="${#fields.hasErrors('senha')} ? 'error'"
+                   placeholder="Mínimo 8 caracteres"
+                   minlength="8"
+                   required>
+            <span class="error-msg"
+                  th:if="${#fields.hasErrors('senha')}"
+                  th:errors="*{senha}"></span>
+        </div>
+ 
+        <!--
+            Campo oculto: define o tipo como "administrador" (1).
+        -->
+        <input type="hidden" th:field="*{idTipoUsuario}" value="1">
+ 
+        <button type="submit" class="btn-submit">Cadastrar</button>
+    </form>
+ 
+    <p class="footer-link">
+        Já tem cadastro? <a th:href="@{/login}">Entrar</a>
+    </p>
+</div>
+ 
+</body>
+</html>

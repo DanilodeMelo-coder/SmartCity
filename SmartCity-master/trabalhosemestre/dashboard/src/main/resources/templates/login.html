@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Segurança Pública</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #1a1a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: #16213e;
+      border: 1px solid #2a2a4a;
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      width: 100%;
+      max-width: 380px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: #0f3460;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; color: #00d4aa;
+    }
+    .header h1 { font-size: 16px; color: #e0e0e0; font-weight: 500; }
+    .header p  { font-size: 12px; color: #888; }
+    .erro {
+      background: #c0392b22;
+      border: 1px solid #c0392b55;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 1rem;
+      font-size: 13px;
+      color: #e57373;
+    }
+    label { font-size: 13px; color: #aaa; display: block; margin-bottom: 6px; }
+    .input-wrap { position: relative; margin-bottom: 1rem; }
+    .input-wrap input {
+      width: 100%;
+      padding: 10px 12px 10px 36px;
+      background: #0d1b2a;
+      border: 1px solid #2a2a4a;
+      border-radius: 6px;
+      color: #e0e0e0;
+      font-size: 14px;
+    }
+    .input-wrap input:focus {
+      outline: none;
+      border-color: #00d4aa;
+    }
+    .input-wrap .icon-left {
+      position: absolute; left: 10px; top: 50%;
+      transform: translateY(-50%);
+      color: #555; font-size: 17px;
+    }
+    .input-wrap .icon-right {
+      position: absolute; right: 10px; top: 50%;
+      transform: translateY(-50%);
+      color: #555; font-size: 17px; cursor: pointer;
+    }
+    .senha-wrap input { padding-right: 36px; }
+    .btn {
+      width: 100%;
+      padding: 11px;
+      background: #00d4aa;
+      border: none;
+      border-radius: 6px;
+      color: #0d1b2a;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    .btn:hover { background: #00b894; }
+    .rodape { text-align: center; font-size: 13px; color: #666; margin-top: 1.25rem; }
+    .rodape a { color: #00d4aa; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <div class="header">
+    <div class="avatar">🔒</div>
+    <div>
+      <h1>Segurança Pública</h1>
+      <p>Central de Monitoramento</p>
+    </div>
+  </div>
+
+  <div class="erro" th:if="${param.erro}">
+    CPF ou senha incorretos!
+  </div>
+
+  <form th:action="@{/login}" method="post">
+
+    <div>
+      <label>CPF</label>
+      <div class="input-wrap">
+        <span class="icon-left">👤</span>
+        <input type="text" name="username" placeholder="000.000.000-00" required/>
+      </div>
+    </div>
+
+    <div>
+      <label>Senha</label>
+      <div class="input-wrap senha-wrap">
+        <span class="icon-left">🔑</span>
+        <input type="password" id="senha" name="password" placeholder="Mínimo 8 caracteres" required/>
+        <span class="icon-right" onclick="toggleSenha()">👁️</span>
+      </div>
+    </div>
+
+    <button type="submit" class="btn">Entrar</button>
+
+  </form>
+
+  <p class="rodape">
+    Não tem conta? <a th:href="@{/cadastro}">Cadastrar</a>
+  </p>
+
+</div>
+
+<script>
+  function toggleSenha() {
+    const input = document.getElementById('senha');
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
+</script>
+</body>
+</html>

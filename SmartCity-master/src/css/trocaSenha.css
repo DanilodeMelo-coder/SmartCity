@@ -1,0 +1,104 @@
+
+#modal_login {
+      background-color: #0d1821;
+      border: 1px solid #1a3350;
+      border-radius: 16px;
+      padding: 32px;
+      width: 360px;
+      display: flex;
+      flex-direction:column;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.15);
+      animation: modal_entrar 0.25s ease;
+}
+body {
+      display: flex;
+      justify-content: center; /* Centraliza horizontalmente */
+      align-items: center;     /* Centraliza verticalmente */
+      min-height: 100vh;       /* Faz o body ocupar 100% da altura da tela */
+      margin: 0;               /* Remove margens brancas indesejadas ao redor da página */
+      background-color: #070d14;
+}
+
+#modal_avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+}
+
+#modal_titulo {
+      color: #ccd6f6;
+      font-size: 18px;
+      font-weight: 600;
+}
+
+#modal_subtitulo {
+      color: #8892b0;
+      font-size: 12px;
+      margin-top: -12px;
+}
+
+.modal_campo {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+}
+
+.modal_campo label {
+      font-size: 13px;
+      color: #8892b0;
+}
+
+.modal_campo input {
+      background-color: #070d14;
+      border: 1px solid #112233;
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #ccd6f6;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      outline: none;
+      transition: border 0.2s ease;
+}
+
+.modal_campo input:focus {
+      border-color: #00d4ff;
+      box-shadow: 0 0 8px rgba(0, 212, 255, 0.2);
+}
+
+@keyframes modal_btn_email {
+      from { opacity: 0; transform: scale(0.95); }
+      to   { opacity: 1; transform: scale(1); }
+}
+#modal_btn_senha {
+      width: 100%;
+      padding: 10px;
+      background-color: #00d4ff;
+      color: #070d14;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+}
+#modal_btn_entrar {
+      width: 100%;
+      padding: 10px;
+      background-color: #00d4ff;
+      color: #070d14;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+}

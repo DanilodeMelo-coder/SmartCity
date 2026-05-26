@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Registrar Ocorrência</title>
+
+<link rel="stylesheet" href="cidadao.css" />
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+</head>
+
+<body>
+    <div class="container">
+
+    <header>
+        <div class="header-left">
+        <span>🔒</span>
+
+        <div>
+            <h1>Segurança Pública</h1>
+            <p>Central de Monitoramento</p>
+        </div>
+    </div>
+
+    <button class="btn-logout" onclick="logout()">
+        Sair
+    </button>
+    </header>
+
+    <div class="content">
+
+    <!-- MAPA -->
+    <div class="mapa-box">
+        <p class="instrucao">
+            Clique no mapa para marcar o local da ocorrência
+        </p>
+
+        <div id="mapa"></div>
+    </div>
+
+    <!-- FORMULÁRIO -->
+    <div class="form-box">
+        <h2>Nova Ocorrência</h2>
+
+        <div class="erro" id="erro"></div>
+        <div class="sucesso" id="sucesso"></div>
+
+        <label>Título</label>
+        <input
+            type="text"
+            id="titulo"
+            placeholder="Ex: Buraco na rua"
+        />
+
+        <label>Descrição</label>
+        <textarea
+            id="descricao"
+            placeholder="Descreva a ocorrência..."
+        ></textarea>
+
+        <label>Tipo</label>
+        <select id="tipo">
+            <option value="1">Infraestrutura</option>
+            <option value="2">Segurança</option>
+            <option value="3">Saúde</option>
+            <option value="4">Meio Ambiente</option>
+        </select>
+
+        <label>Região</label>
+        <select id="bairro">
+            <option value="1">Centro</option>
+            <option value="2">Norte</option>
+            <option value="3">Sul</option>
+            <option value="4">Leste</option>
+            <option value="5">Oeste</option>
+            <option value="6">Não sei</option>
+        </select>
+
+        <label>Localização selecionada</label>
+        <input
+            type="text"
+            id="localizacao"
+            placeholder="Clique no mapa..."
+            readonly
+        />
+
+        <button onclick="cadastrarOcorrencia()">
+        Registrar Ocorrência
+        </button>
+    </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="cidadao.js"></script>
+</body>
+</html>

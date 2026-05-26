@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="login.css"/>
+</head>
+<body>
+
+<div class="card">
+<div class="header">
+    <div class="avatar">🔒</div>
+    <div>
+    <h1>Segurança Pública</h1>
+    <p>Central de Monitoramento</p>
+    </div>
+</div>
+
+<div class="erro" id="erro">CPF ou senha incorretos!</div>
+
+<label>CPF</label>
+<input type="text" id="cpf" placeholder="000.000.000-00"/>
+
+<label>Senha</label>
+<input type="password" id="senha" placeholder="Mínimo 8 caracteres"/>
+
+<button onclick="fazerLogin()">Entrar</button>
+
+<p class="rodape">Não tem conta? <a href="../cadastro/cadastro.html">Cadastrar</a></p>
+<p class="rodape">Esqueceu sua senha? <a href="../esqueciSenhaUsuario.html">clique aqui</a></p>
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>

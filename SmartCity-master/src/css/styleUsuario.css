@@ -1,0 +1,76 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins&display=swap);
+
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+}
+
+/* --- topo/header --- */
+#topo {
+      background-color: #0d1821;
+      padding: 16px 24px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #112233;
+}
+
+#titulo {
+      color: #ccd6f6;
+      font-size: 20px;
+      font-weight: 600;
+}
+
+#subtitulo {
+      color: #8892b0;
+      font-size: 13px;
+}
+
+#topo_direita {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+}
+
+.topo_btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      transition: background-color 0.2s ease;
+}
+
+.topo_btn:hover {
+      background-color: rgba(0, 212, 255, 0.05);
+}
+
+.topo_btn img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+}
+
+main {
+      padding: 24px;
+      flex: 1;
+      background-color: #070d14;
+}
+/* Mapa */
+#mapa{
+      width: 100%;
+      height: 800px;
+      border-radius: 16px;
+      border: 1px solid #1a3350;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      z-index: 1; 
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+      <link rel="stylesheet" href="src/css/style.css">
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+      <title>Admin</title>
+</head>
+<body>
+
+      <nav id="sidebar">
+
+            <div id="sidebar_top">
+
+                  <div id="user">
+                        <img src="img/logo.png" id="user_avatar" alt="Avatar">
+                        <p id="user_infos">
+                              <span class="item-description">Smart City</span>
+                              <span class="item-description">Central de Monitoramento</span>
+                        </p>
+                  </div>
+
+                  <ul id="side_item">
+                        <li class="side-item active">
+                              <a href="#">
+                                    <img src="img/painel-de-controle.png">
+                                    <span class="item-description">Dashboard</span>
+                              </a>
+            </div>
+
+                  <button id="logout_btn">
+                  <div id="logout">
+                  <a href="login/login.html" id="logout_btn">Login/Cadastro</a>
+                  </div>
+                  </button>
+            </div>
+
+            <button id="open_btn">
+                  <img id="open_btn_icon" src="img/seta_direita.png" alt="">
+            </button>
+
+      </nav>
+
+      <div id="conteudo">
+
+            <header id="topo">
+                  <div id="topo_esquerda">
+                        <h1 id="titulo">Dashboard</h1>
+                        <p id="subtitulo">Cidade de São Paulo</p>
+                  </div>       
+            </header>
+
+            <main>
+
+                  <div id="cards">
+                        <div class="card">
+                              <div class="card_topo">
+                                    <span class="card_titulo">Total de Ocorrências</span>
+                                    <div class="card_icone laranja">
+                                          <img src="img/atencao.png">
+                                    </div>
+                              </div>
+                              <h2 id="total_ocorrencias">--</h2>
+                              <p class="card_variacao" id="variacao_total">Carregando...</p>
+                        </div>
+                        <div class="card">
+                              <div class="card_topo">
+                                    <span class="card_titulo">Tempo Médio de Resposta</span>
+                                    <div class="card_icone azul">
+                                          <img src="img/relogio2.png">
+                                    </div>
+                              </div>
+                              <h2 id="tempo_resposta">--</h2>
+                              <p class="card_variacao" id="variacao_tempo">Carregando...</p>
+                        </div>
+                        <div class="card">
+                              <div class="card_topo">
+                                    <span class="card_titulo">Regiões Monitoradas</span>
+                                    <div class="card_icone roxo">
+                                          <img src="img/mapa.png">
+                                    </div>
+                              </div>
+                              <h2 id="regioes">--</h2>
+                              <p class="card_variacao" id="variacao_regioes">Carregando...</p>
+                        </div>
+                        <div class="card">
+                              <div class="card_topo">
+                                    <span class="card_titulo">Taxa de Resolução</span>
+                                    <div class="card_icone verde">
+                                          <img src="img/estatistica.png">
+                                    </div>
+                              </div>
+                              <h2 id="taxa_resolucao">--</h2>
+                              <p class="card_variacao" id="variacao_taxa">Carregando...</p>
+                        </div>
+                  </div>
+
+                  <div id="graficos">
+                        <div class="grafico_card">
+                              <div class="grafico_header">
+                                    <div>
+                                          <h3 class="grafico_titulo">Ocorrências por Região</h3>
+                                    </div>
+                                    <button class="grafico_btn">Mensal</button>
+                              </div>
+                              <canvas id="grafico_regioes"></canvas>
+                        </div>
+                        <div class="grafico_card">
+                              <div class="grafico_header">
+                                    <div>
+                                          <h3 class="grafico_titulo">Tipos de Incidentes</h3>
+                                          <p class="grafico_subtitulo">Distribuição percentual</p>
+                                    </div>
+                                    <span class="grafico_total" id="total_tipos"></span>
+                              </div>
+                              <canvas id="grafico_tipos"></canvas>
+                        </div>
+                  </div>
+
+                  <div id="secao_mapa">
+                        <div class="grafico_card">
+                              <div class="grafico_header">
+                                    <div>
+                                          <h3 class="grafico_titulo">Mapa de Incidências</h3>
+                                          <p class="grafico_subtitulo">São Paulo — hotspots em tempo real</p>
+                                    </div>
+                                    <div id="mapa_legenda">
+                                          <span class="legenda_item"><span class="legenda_dot alto"></span> Alto</span>
+                                          <span class="legenda_item"><span class="legenda_dot medio"></span> Médio</span>
+                                          <span class="legenda_item"><span class="legenda_dot baixo"></span> Baixo</span>
+                                    </div>
+                              </div>
+                              <div id="mapa"></div>
+                        </div>
+                        
+                  </div>
+            </main>
+
+      </div>
+</div>
+
+      <script src="src/javascript/script.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
+
+</body>
+</html>

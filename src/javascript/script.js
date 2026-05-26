@@ -51,6 +51,45 @@ async function carregarDashboard() {
         const lista = await resposta.json();
 
         document.getElementById('total_ocorrencias').textContent = lista.length;
+
+        // ─── MARCADORES NO MAPA COM ÍCONES POR TIPO ───────────────────
+const grupoMarcadores = L.layerGroup().addTo(mapa);
+
+const tiposIcone = {
+    1: { emoji: '🔧', cor: '#e67e22', label: 'Infraestrutura' },
+    2: { emoji: '🚨', cor: '#e74c3c', label: 'Segurança'      },
+    3: { emoji: '🏥', cor: '#3498db', label: 'Saúde'          },
+    4: { emoji: '🌿', cor: '#27ae60', label: 'Meio Ambiente'  }
+};
+
+lista.forEach(ocorrencia => {
+    if (!ocorrencia.latitude || !ocorrencia.longitude) return;
+
+    const tipo = tiposIcone[ocorrencia.idTipo] || { emoji: '📍', cor: '#7f8c8d', label: 'Outro' };
+
+    const icone = L.divIcon({
+        className: '',
+        html: `<div style="background:${tipo.cor};color:white;border-radius:50%;
+               width:36px;height:36px;display:flex;align-items:center;
+               justify-content:center;font-size:18px;border:2px solid white;
+               box-shadow:0 2px 6px rgba(0,0,0,0.4)">${tipo.emoji}</div>`,
+        iconSize: [36, 36],
+        iconAnchor: [18, 18]
+    });
+
+    const data = ocorrencia.dataOcorrencia
+        ? new Date(ocorrencia.dataOcorrencia).toLocaleDateString('pt-BR')
+        : 'Data não informada';
+
+    L.marker([ocorrencia.latitude, ocorrencia.longitude], { icon: icone })
+        .bindPopup(`
+            <strong>${ocorrencia.titulo || 'Sem título'}</strong><br>
+            <span style="color:#666">${tipo.label}</span><br>
+            ${ocorrencia.descricao || ''}<br>
+            <small>📅 ${data}</small>
+        `)
+        .addTo(grupoMarcadores);
+});
         document.getElementById('variacao_total').textContent = '';
 
         // Tempo médio de resposta

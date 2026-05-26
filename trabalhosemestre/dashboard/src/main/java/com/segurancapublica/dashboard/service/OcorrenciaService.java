@@ -35,4 +35,8 @@ public List<Object[]> ocorrenciasPorBairro() {
     return ocorrenciaRepository.findOcorrenciasPorBairro();
 }
 
+public List<Object[]> ocorrenciasPorTipo() {
+    return ocorrenciaRepository.findOcorrenciasPorTipo();
+}
+
 }

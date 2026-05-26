@@ -13,4 +13,7 @@ public interface OcorrenciaRepository extends JpaRepository<Ocorrencia, Long> {
     @Query(value = "SELECT b.nome, COUNT(o.id_ocorrencia) as total FROM ocorrencias o JOIN bairros b ON o.id_bairro = b.id_bairro GROUP BY b.nome ORDER BY total DESC", nativeQuery = true)
     List<Object[]> findOcorrenciasPorBairro();
     
+    @Query(value = "SELECT t.nome, COUNT(o.id_ocorrencia) as total FROM ocorrencias o JOIN tipos_ocorrencia t ON o.id_tipo = t.id_tipo GROUP BY t.nome ORDER BY total DESC", nativeQuery = true)
+    List<Object[]> findOcorrenciasPorTipo();
+    
 }

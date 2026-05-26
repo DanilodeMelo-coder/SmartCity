@@ -13,6 +13,6 @@ public class HomeController {
 
     @GetMapping("/cidadao/home")
     public String cidadaoHome() {
-        return "cidadao/home";
+        return "redirect:/cidadao/cidadao.html";
     }
 }

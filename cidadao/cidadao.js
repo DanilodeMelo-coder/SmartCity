@@ -106,7 +106,7 @@ async function cadastrarOcorrencia() {
     }
 }
 
-// --- FUNÇÃO PARA LIMPAR O FORMULÁRIO APÓS O ENVIO ---
+// FUNÇÃO PARA LIMPAR O FORMULÁRIO APÓS O ENVIO
 function limparFormulario() {
     document.getElementById('titulo').value = '';
     document.getElementById('descricao').value = '';
@@ -119,8 +119,84 @@ function limparFormulario() {
     }
 }
 
-// --- FUNÇÃO DE LOGOUT ---
+//FUNÇÃO DE LOGOUT
 function logout() {
     localStorage.removeItem('tipo');
     window.location.href = '../login/login.html';
 }
+
+//ÍCONES POR TIPO DE OCORRÊNCIA
+const icones = {
+    1: { emoji: '🔧', cor: '#e67e22', label: 'Infraestrutura' },
+    2: { emoji: '🚨', cor: '#e74c3c', label: 'Segurança'      },
+    3: { emoji: '🏥', cor: '#3498db', label: 'Saúde'          },
+    4: { emoji: '🌿', cor: '#27ae60', label: 'Meio Ambiente'  }
+};
+
+function criarIcone(idTipo) {
+    const tipo = icones[idTipo] || { emoji: '📍', cor: '#7f8c8d', label: 'Outro' };
+    return L.divIcon({
+        className: '',
+        html: `<div style="
+            background:${tipo.cor};
+            color:white;
+            border-radius:50%;
+            width:36px;height:36px;
+            display:flex;align-items:center;justify-content:center;
+            font-size:18px;
+            border:2px solid white;
+            box-shadow:0 2px 6px rgba(0,0,0,0.4);
+        ">${tipo.emoji}</div>`,
+        iconSize: [36, 36],
+        iconAnchor: [18, 18]
+    });
+}
+
+//CARREGA OCORRÊNCIAS PRÓXIMAS
+const marcadoresOcorrencias = [];
+
+async function carregarOcorrenciasProximas(lat, lng) {
+    try {
+        const resp = await fetch(
+            `http://localhost:8080/ocorrencias/proximas?lat=${lat}&lng=${lng}&raioKm=5`
+        );
+        const ocorrencias = await resp.json();
+
+        // Remove os marcadores antigos do mapa
+        marcadoresOcorrencias.forEach(m => mapa.removeLayer(m));
+        marcadoresOcorrencias.length = 0;
+
+        ocorrencias.forEach(o => {
+            if (!o.latitude || !o.longitude) return;
+
+            const tipo  = icones[o.idTipo] || { label: 'Outro' };
+            const data  = o.dataOcorrencia
+                ? new Date(o.dataOcorrencia).toLocaleDateString('pt-BR')
+                : 'Data não informada';
+
+            const m = L.marker([o.latitude, o.longitude], { icon: criarIcone(o.idTipo) })
+                .bindPopup(`
+                    <strong>${o.titulo || 'Sem título'}</strong><br>
+                    <span style="color:#666">${tipo.label}</span><br>
+                    ${o.descricao || ''}<br>
+                    <small>📅 ${data}</small>
+                `)
+                .addTo(mapa);
+
+            marcadoresOcorrencias.push(m);
+        });
+
+        console.log(`${ocorrencias.length} ocorrência(s) encontrada(s) no raio de 5km`);
+
+    } catch (err) {
+        console.log('Erro ao carregar ocorrências próximas:', err);
+    }
+}
+
+// CHAMA QUANDO O GPS ENCONTRAR A LOCALIZAÇÃO 
+// Sobrescreve o evento locationfound para também carregar ocorrências
+mapa.on('locationfound', function (e) {
+    carregarOcorrenciasProximas(e.latlng.lat, e.latlng.lng);
+
+     carregarOcorrenciasProximas(latitude, longitude);
+});

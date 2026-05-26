@@ -7,20 +7,7 @@
       font-family: 'Poppins', sans-serif;
 }
 
-body {
-      display: flex;
-      min-height: 100vh;
-      background-color: #070d14;
-}
-
-#conteudo {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      transition: margin-left 0.3s ease;
-}
-
-/* --- TOPO / HEADER --- */
+/* --- topo/header --- */
 #topo {
       background-color: #0d1821;
       padding: 16px 24px;
@@ -29,12 +16,6 @@ body {
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #112233;
-}
-
-#topo_esquerda {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
 }
 
 #titulo {
@@ -63,7 +44,7 @@ body {
       gap: 8px;
       padding: 8px 12px;
       border-radius: 8px;
-      color: #8892b0;
+      color: white;
       font-family: 'Poppins', sans-serif;
       font-size: 13px;
       transition: background-color 0.2s ease;
@@ -85,7 +66,7 @@ main {
       background-color: #070d14;
 }
 
-/* --- CARDS INDICADORES --- */
+/* --- Card indicador --- */
 #cards {
       display: flex;
       gap: 16px;
@@ -123,42 +104,16 @@ main {
       color: #8892b0;
       font-size: 13px;
 }
-
-.card_icone {
-      border-radius: 10px;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-}
-
 .card_icone img {
       width: 18px;
       height: 18px;
       object-fit: contain;
 }
 
-.laranja { background-color: rgba(255, 140, 50, 0.1); }
-.azul    { background-color: rgba(0, 212, 255, 0.1); }
-
-.card h2 {
-      font-size: 30px;
-      font-weight: 700;
-      color: #ccd6f6;
-}
-
-.card_variacao {
-      font-size: 12px;
-      color: #f85149;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-}
-
-/* --- MAPA COM LEAFLET --- */
-#mapa {
+/* Mapa */
+#mapa{
       width: 100%;
-      height: 480px;
+      height: 647px;
       border-radius: 16px;
       border: 1px solid #1a3350;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
